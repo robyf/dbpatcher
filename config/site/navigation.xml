@@ -10,19 +10,13 @@
 -->
     </section>
     <section id="reports" label="Project reports">
-<!--    
         <link id="javadoc" label="JavaDocs" url="javadoc/index.html" newwindow="true" />
--->        
         <link id="sources" label="Source code" url="j2h/index.html" newwindow="true" />
         <link id="junit" label="JUnit report" url="junit/index.html" newwindow="true" />
-<!-- 
         <link id="cobertura" label="Cobertura report" url="cobertura/index.html" newwindow="true" />
--->
         <link id="checkstyle" label="CheckStyle report" url="checkstyle_report.html" newwindow="true" />
         <link id="cpd" label="CPD report" url="cpd.html" newwindow="true" />
-<!-- 
         <link id="javancss" label="JavaNCSS report" url="javancss.html" newwindow="true" />
         <link id="jdepend" label="JDepend report" url="jdepend.html" newwindow="true" />
--->
     </section>
 </navigation>

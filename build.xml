@@ -285,6 +285,30 @@
     </target>
 
 	
+	<!-- Javadoc -->
+	
+    <target name="javadoc">
+        <tstamp>
+            <format property="TODAY_IT" pattern="dd MMMM yyyy" locale="en.US" />
+        </tstamp>
+        <mkdir dir="${javadoc.dir}" />
+        <javadoc destdir="${javadoc.dir}"
+                 author="true"
+                 use="true"
+                 classpathref="classpath"
+                 source="1.7"
+                 doctitle="${application.name} - version ${version}"
+                 windowtitle="${application.name} - version ${version}"
+                 header="&lt;b&gt;${application.name}&lt;/b&gt;&lt;br /&gt;version ${version}"
+                 footer="&lt;b&gt;${application.name}&lt;/b&gt;&lt;br /&gt;version ${version}">
+            <fileset dir="${source.dir}" defaultexcludes="yes">
+                <include name="**/*.java" />
+            </fileset>
+            <bottom><![CDATA[<i>Created on ${TODAY_IT}</i>]]></bottom>
+        </javadoc>
+    </target>
+	
+	
 	<!-- Java 2 html -->
     
     <taskdef name="java2html" classname="com.java2html.Java2HTMLTask" classpathref="classpath" />
@@ -294,7 +318,7 @@
             <fileset dir="${source.dir}" defaultexcludes="yes">
                 <include name="**/*.java" />
             </fileset>
-            <!--javadoc localRef="${dir.build.javadoc}" httpRef="http://www.robyf.net/software/dbexporter/javadoc"/-->
+            <javadoc localRef="${javadoc.dir}" httpRef="http://www.robyf.net/software/dbpatcher/javadoc"/>
         </java2html>
     </target>
 	
@@ -302,7 +326,7 @@
     <!-- All reporting in one -->
 
     <target name="reports"
-            depends="clean,cover-test,checkstyle,cpd,jdepend,complexity,java2html"
+            depends="clean,cover-test,checkstyle,cpd,jdepend,complexity,javadoc,java2html"
             description="Generates all reports" />
 
     <target name="dist" depends="clean,compile,jar,reports" />
@@ -317,19 +341,9 @@
 	</target>
     
     <target name="ftppublish">
-<!--
-    	<ftp password="${ftp.password}" server="${ftp.server}" userid="${ftp.username}" remotedir="${ftp.javadoc.dir}">
-            <fileset dir="${dir.build.javadoc}" />
+    	<ftp verbose="yes" passive="yes" password="${ftp.password}" server="${ftp.server}" userid="${ftp.username}" remotedir="${ftp.javadoc.dir}">
+            <fileset dir="${javadoc.dir}" />
         </ftp>
--->
-        <!--
-            <ftp password="${ftp.password}" 
-                 server="${ftp.server}" 
-                 userid="${ftp.username}"
-                 remotedir="${ftp.j2h.dir}">
-                <fileset dir="${dir.build.java2html}" />
-            </ftp>
-            -->
         <ftp verbose="yes" passive="yes" password="${ftp.password}" server="${ftp.server}" userid="${ftp.username}" remotedir="${ftp.j2h.dir}">
             <fileset dir="${sources.report.dir}" />
         </ftp>
@@ -342,9 +356,9 @@
         <ftp verbose="yes" passive="yes" password="${ftp.password}" server="${ftp.server}" userid="${ftp.username}" remotedir="${ftp.basedir}">
             <fileset file="${test.checkstyle.report.dir}/checkstyle_report.html" />
             <fileset file="${test.cpd.report.dir}/cpd.html" />
-<!--
         	<fileset file="${dir.build.javancss}/javancss.html" />
             <fileset file="${dir.build.jdepend}/jdepend.html" />
+<!--
             <fileset file="${zip.bin.file}" />
             <fileset file="${zip.src.file}" />
 -->
