@@ -316,15 +316,13 @@
                 <fileset dir="${dir.build.java2html}" />
             </ftp>
             -->
-<!--
-    	<ftp password="${ftp.password}" server="${ftp.server}" userid="${ftp.username}" remotedir="${ftp.junit.dir}">
+    	<ftp verbose="yes" passive="yes" password="${ftp.password}" server="${ftp.server}" userid="${ftp.username}" remotedir="${ftp.junit.dir}">
             <fileset dir="${test.unit.report.dir}" />
         </ftp>
-        <ftp password="${ftp.password}" server="${ftp.server}" userid="${ftp.username}" remotedir="${ftp.cobertura.dir}">
+        <ftp verbose="yes" passive="yes" password="${ftp.password}" server="${ftp.server}" userid="${ftp.username}" remotedir="${ftp.cobertura.dir}">
             <fileset dir="${test.coverage.report.dir}" />
         </ftp>
--->
-        <ftp password="${ftp.password}" server="${ftp.server}" userid="${ftp.username}" remotedir="${ftp.basedir}">
+        <ftp verbose="yes" passive="yes" password="${ftp.password}" server="${ftp.server}" userid="${ftp.username}" remotedir="${ftp.basedir}">
             <fileset file="${test.checkstyle.report.dir}/checkstyle_report.html" />
             <fileset file="${test.cpd.report.dir}/cpd.html" />
 <!--
@@ -338,6 +336,6 @@
     </target>
 
     <target name="publish" 
-            depends="clean,compile,dist,fail-if-tests-failed" />
+            depends="clean,compile,dist,fail-if-tests-failed,site,ftppublish" />
 
 </project>
