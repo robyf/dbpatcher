@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation>
+    <section id="documentation" label="Documentation">
+        <page id="overview" label="Overview" file="index" />
+<!-- 
+        <page id="dependencies" label="Dependencies" file="dependencies" />
+        <page id="userguide" label="User Guide" file="userguide" />
+        <page id="anttask" label="Ant Task" file="anttask" />
+        <page id="download" label="Download" file="download" />
+-->
+    </section>
+    <section id="reports" label="Project reports">
+<!--    
+        <link id="javadoc" label="JavaDocs" url="javadoc/index.html" newwindow="true" />
+-->        
+        <!--link id="sources" label="Sources" url="j2h/index.html" newwindow="true" /-->
+        <link id="junit" label="JUnit report" url="junit/index.html" newwindow="true" />
+<!-- 
+        <link id="cobertura" label="Cobertura report" url="cobertura/index.html" newwindow="true" />
+-->
+        <link id="checkstyle" label="CheckStyle report" url="checkstyle_report.html" newwindow="true" />
+        <link id="cpd" label="CPD report" url="cpd.html" newwindow="true" />
+<!-- 
+        <link id="javancss" label="JavaNCSS report" url="javancss.html" newwindow="true" />
+        <link id="jdepend" label="JDepend report" url="jdepend.html" newwindow="true" />
+-->
+    </section>
+</navigation>

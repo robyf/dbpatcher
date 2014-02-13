@@ -24,6 +24,7 @@
         <mkdir dir="${build.dir}" />
         <mkdir dir="${production.dir}" />
         <mkdir dir="${production.classes.dir}" />
+    	<mkdir dir="${site.dir}" />
         <mkdir dir="${log.dir}" />
     </target>
 
@@ -69,21 +70,51 @@
     </target>
 	
 	<target name="jar" unless="test.fail" depends="compile">
+		<manifestclasspath property="jar.classpath" jarfile="${lib.dir}/ant.jar">
+			<classpath>
+				<pathelement location="${lib.dir}/." />
+		        <fileset dir="${lib.dir}">
+		            <include name="*.jar" />
+		        	<exclude name="ant.jar" />
+		        </fileset>
+			</classpath>
+		</manifestclasspath>
+		<property name="jar.correctedclasspath" value=".${jar.classpath}" />
+        <jar destfile="${jar.full.file}">
+            <manifest>
+                <attribute name="Implementation-Title" value="${application.name}" />
+                <attribute name="Implementation-Version" value="${date}" />
+                <attribute name="Implementation-Vendor" value="Roberto Fasciolo" />
+                <attribute name="Class-Path" value="." />
+            	<attribute name="Rsrc-Class-Path" value="${jar.correctedclasspath}" />
+                <attribute name="Rsrc-Main-Class" value="net.robyf.dbpatcher.Launcher" />
+                <attribute name="Main-Class" value="org.eclipse.jdt.internal.jarinjarloader.JarRsrcLoader" />
+            </manifest>
+        	
+        	<zipfileset src="${config.dir}/jar-in-jar-loader.zip" />
+            <fileset dir="${class.dir}">
+                <include name="**/*" />
+            </fileset>
+        	<zipfileset dir="${config.dir}" prefix="net/robyf/dbpatcher" includes="dbpatcher.properties" />
+            <fileset dir="${lib.dir}">
+                <include name="*.jar" />
+                <exclude name="ant.jar" />
+            </fileset>
+		</jar>
         <jar destfile="${jar.file}">
             <!-- http://java.sun.com/developer/Books/javaprogramming/JAR/basics/manifest.html -->
             <manifest>
                 <attribute name="Implementation-Title" value="${application.name}" />
                 <attribute name="Implementation-Version" value="${date}" />
                 <attribute name="Implementation-Vendor" value="Roberto Fasciolo" />
-                <attribute name="Built-By" value="${user.name}" />
                 <attribute name="Main-Class" value="net.robyf.dbpatcher.Launcher" />
             </manifest>
-        	
+            
             <fileset dir="${class.dir}">
                 <include name="**/*" />
             </fileset>
-        	<zipfileset dir="${config.dir}" prefix="net/robyf/dbpatcher" includes="dbpatcher.properties" />
-		</jar>
+            <zipfileset dir="${config.dir}" prefix="net/robyf/dbpatcher" includes="dbpatcher.properties" />
+        </jar>
 	</target>
 
     <!-- JUnit -->
@@ -264,6 +295,46 @@
 
     <target name="fail-if-tests-failed" if="test.fail">
         <fail message="Some tests failed" />
+    </target>
+	
+	<target name="site">
+		<taskdef name="vsitegen" classname="net.robyf.vsitegen.ant.VSiteGenTask" classpathref="classpath" />
+		<vsitegen project="dbpatcher" navigation="${config.site.dir}/navigation.xml" content="${config.site.dir}" template="robyf.vtl" output="${site.dir}" />
+	</target>
+    
+    <target name="ftppublish">
+<!--
+    	<ftp password="${ftp.password}" server="${ftp.server}" userid="${ftp.username}" remotedir="${ftp.javadoc.dir}">
+            <fileset dir="${dir.build.javadoc}" />
+        </ftp>
+-->
+        <!--
+            <ftp password="${ftp.password}" 
+                 server="${ftp.server}" 
+                 userid="${ftp.username}"
+                 remotedir="${ftp.j2h.dir}">
+                <fileset dir="${dir.build.java2html}" />
+            </ftp>
+            -->
+<!--
+    	<ftp password="${ftp.password}" server="${ftp.server}" userid="${ftp.username}" remotedir="${ftp.junit.dir}">
+            <fileset dir="${test.unit.report.dir}" />
+        </ftp>
+        <ftp password="${ftp.password}" server="${ftp.server}" userid="${ftp.username}" remotedir="${ftp.cobertura.dir}">
+            <fileset dir="${test.coverage.report.dir}" />
+        </ftp>
+-->
+        <ftp password="${ftp.password}" server="${ftp.server}" userid="${ftp.username}" remotedir="${ftp.basedir}">
+            <fileset file="${test.checkstyle.report.dir}/checkstyle_report.html" />
+            <fileset file="${test.cpd.report.dir}/cpd.html" />
+<!--
+        	<fileset file="${dir.build.javancss}/javancss.html" />
+            <fileset file="${dir.build.jdepend}/jdepend.html" />
+            <fileset file="${zip.bin.file}" />
+            <fileset file="${zip.src.file}" />
+-->
+            <fileset dir="${site.dir}" />
+        </ftp>
     </target>
 
     <target name="publish" 

@@ -71,7 +71,7 @@ public final class Launcher {
         }
 
         if (showHelp) {
-            new HelpFormatter().printHelp("java " + Launcher.class.getName()
+            new HelpFormatter().printHelp("java -jar dbpatcher.jar"
                                                   + " -u username -p password -d database_name"
                                                   + " [options] schema_root",
                                           "Available options:",
