@@ -56,7 +56,6 @@
         <copy todir="${unit.test.class.dir}">
             <fileset dir="${unit.test.source.dir}" includes="**/*.sql" />
         </copy>
-<!--
     	<javac srcdir="${test.source.dir}" 
                destdir="${test.class.dir}" 
                debug="on" 
@@ -67,7 +66,6 @@
         <copy todir="${test.class.dir}">
             <fileset dir="${test.source.dir}" includes="**/*.log.*" />
         </copy>
--->
     </target>
 	
 	<target name="jar" unless="test.fail" depends="compile">
@@ -121,11 +119,9 @@
                 <fileset dir="${unit.test.source.dir}">
                     <include name="**/${test}.java" />
                 </fileset>
-<!--
             	<fileset dir="${test.source.dir}">
                     <include name="**/${test}.java" />
                 </fileset>
--->
             </batchtest>
 
             <jvmarg value="-Dlog4j.configuration=file:${log4j.config.file}" />
