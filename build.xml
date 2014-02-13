@@ -356,8 +356,8 @@
         <ftp verbose="yes" passive="yes" password="${ftp.password}" server="${ftp.server}" userid="${ftp.username}" remotedir="${ftp.basedir}">
             <fileset file="${test.checkstyle.report.dir}/checkstyle_report.html" />
             <fileset file="${test.cpd.report.dir}/cpd.html" />
-        	<fileset file="${dir.build.javancss}/javancss.html" />
-            <fileset file="${dir.build.jdepend}/jdepend.html" />
+        	<fileset file="${test.javancss.report.dir}/javancss.html" />
+            <fileset file="${test.jdepend.report.dir}/jdepend.html" />
 <!--
             <fileset file="${zip.bin.file}" />
             <fileset file="${zip.src.file}" />
