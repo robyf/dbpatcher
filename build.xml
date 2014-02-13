@@ -284,11 +284,25 @@
         <xslt in="${test.javancss.report.dir}/javancss_metrics.xml" style="${config.dir}/javancss2html.xsl" out="${test.javancss.report.dir}/javancss.html" />
     </target>
 
+	
+	<!-- Java 2 html -->
+    
+    <taskdef name="java2html" classname="com.java2html.Java2HTMLTask" classpathref="classpath" />
+    
+    <target name="java2html">
+        <java2html title="${application.name} - version ${version}" simple="no" tabsize="4" marginsize="3" header="true" footer="true" destination="${sources.report.dir}">
+            <fileset dir="${source.dir}" defaultexcludes="yes">
+                <include name="**/*.java" />
+            </fileset>
+            <!--javadoc localRef="${dir.build.javadoc}" httpRef="http://www.robyf.net/software/dbexporter/javadoc"/-->
+        </java2html>
+    </target>
+	
 
     <!-- All reporting in one -->
 
     <target name="reports"
-            depends="clean,cover-test,checkstyle,cpd,jdepend,complexity"
+            depends="clean,cover-test,checkstyle,cpd,jdepend,complexity,java2html"
             description="Generates all reports" />
 
     <target name="dist" depends="clean,compile,jar,reports" />
@@ -316,6 +330,9 @@
                 <fileset dir="${dir.build.java2html}" />
             </ftp>
             -->
+        <ftp verbose="yes" passive="yes" password="${ftp.password}" server="${ftp.server}" userid="${ftp.username}" remotedir="${ftp.j2h.dir}">
+            <fileset dir="${sources.report.dir}" />
+        </ftp>
     	<ftp verbose="yes" passive="yes" password="${ftp.password}" server="${ftp.server}" userid="${ftp.username}" remotedir="${ftp.junit.dir}">
             <fileset dir="${test.unit.report.dir}" />
         </ftp>

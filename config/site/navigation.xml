@@ -13,7 +13,7 @@
 <!--    
         <link id="javadoc" label="JavaDocs" url="javadoc/index.html" newwindow="true" />
 -->        
-        <!--link id="sources" label="Sources" url="j2h/index.html" newwindow="true" /-->
+        <link id="sources" label="Source code" url="j2h/index.html" newwindow="true" />
         <link id="junit" label="JUnit report" url="junit/index.html" newwindow="true" />
 <!-- 
         <link id="cobertura" label="Cobertura report" url="cobertura/index.html" newwindow="true" />
