@@ -50,7 +50,7 @@ public final class Launcher {
         databaseOption.setRequired(true);
         options.addOption(databaseOption);
         options.addOption("r",
-                          "roolback-if-error",
+                          "rollback-if-error",
                           false,
                           "Rolls back the entire operation in case of errors");
         options.addOption("v",
