@@ -20,6 +20,8 @@
 package net.robyf.dbpatcher;
 
 /**
+ * A logger implementation that displays messages to standard output.
+ * 
  * @since 0.9.0
  * @author Roberto Fasciolo
  */

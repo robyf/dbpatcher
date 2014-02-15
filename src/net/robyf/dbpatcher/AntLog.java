@@ -20,6 +20,8 @@
 package net.robyf.dbpatcher;
 
 /**
+ * A logger implementation that displays messages in an ant's console.
+ * 
  * @since 0.9.0
  * @author Roberto Fasciolo
  */

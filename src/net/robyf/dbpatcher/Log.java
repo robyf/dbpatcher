@@ -20,6 +20,8 @@
 package net.robyf.dbpatcher;
 
 /**
+ * A logger used for displaying messages to the tool's user.
+ * 
  * @since 0.9.0
  * @author Roberto Fasciolo
  */
