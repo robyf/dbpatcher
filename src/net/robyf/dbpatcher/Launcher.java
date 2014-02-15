@@ -28,6 +28,10 @@ import org.apache.commons.cli.Options;
 import org.apache.commons.cli.ParseException;
 import org.apache.commons.cli.PosixParser;
 
+/**
+ * @since 0.9.0
+ * @author Roberto Fasciolo
+ */
 public final class Launcher {
 
     private Launcher() {

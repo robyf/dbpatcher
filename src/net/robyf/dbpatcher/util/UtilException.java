@@ -19,6 +19,10 @@
  */
 package net.robyf.dbpatcher.util;
 
+/**
+ * @since 0.9.0
+ * @author Roberto Fasciolo
+ */
 public final class UtilException extends RuntimeException {
 
     public UtilException(final String message) {

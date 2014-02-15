@@ -21,6 +21,10 @@ package net.robyf.dbpatcher;
 
 import java.nio.charset.Charset;
 
+/**
+ * @since 0.9.0
+ * @author Roberto Fasciolo
+ */
 public final class Parameters {
 
     private String databaseName;

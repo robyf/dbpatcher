@@ -29,6 +29,10 @@ import java.util.Enumeration;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 
+/**
+ * @since 0.9.0
+ * @author Roberto Fasciolo
+ */
 public final class ZipUtil {
 
     private ZipUtil() {

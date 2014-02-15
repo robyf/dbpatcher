@@ -19,6 +19,10 @@
  */
 package net.robyf.dbpatcher;
 
+/**
+ * @since 0.9.0
+ * @author Roberto Fasciolo
+ */
 public final class LogFactory {
 
     private static Log log = null;

@@ -22,6 +22,10 @@ package net.robyf.dbpatcher.util;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 
+/**
+ * @since 0.9.0
+ * @author Roberto Fasciolo
+ */
 public final class Column {
 
     private final String name;

@@ -32,7 +32,10 @@ import net.robyf.dbpatcher.schema.SchemaReader;
 import net.robyf.dbpatcher.util.DBUtil;
 import net.robyf.dbpatcher.util.MySqlUtil;
 
-
+/**
+ * @since 0.9.0
+ * @author Roberto Fasciolo
+ */
 final class DBPatcherImpl implements DBPatcher {
 
     private Parameters parameters;

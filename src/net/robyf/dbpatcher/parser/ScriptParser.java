@@ -28,6 +28,10 @@ import java.nio.charset.Charset;
 import java.util.LinkedList;
 import java.util.List;
 
+/**
+ * @since 0.9.0
+ * @author Roberto Fasciolo
+ */
 public final class ScriptParser {
     
     private static final String DEFAULT_DELIMITER = ";";

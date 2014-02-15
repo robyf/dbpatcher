@@ -25,6 +25,10 @@ import java.nio.charset.Charset;
 import org.apache.tools.ant.BuildException;
 import org.apache.tools.ant.Task;
 
+/**
+ * @since 0.9.0
+ * @author Roberto Fasciolo
+ */
 public final class AntLauncher extends Task {
 
     private String username;

@@ -22,6 +22,10 @@ package net.robyf.dbpatcher.util;
 import java.io.File;
 import java.io.IOException;
 
+/**
+ * @since 0.9.0
+ * @author Roberto Fasciolo
+ */
 public final class DirUtil {
 
     private DirUtil() {

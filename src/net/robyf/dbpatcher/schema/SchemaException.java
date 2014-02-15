@@ -19,6 +19,10 @@
  */
 package net.robyf.dbpatcher.schema;
 
+/**
+ * @since 0.9.0
+ * @author Roberto Fasciolo
+ */
 public final class SchemaException extends RuntimeException {
 
     public SchemaException(final String message) {

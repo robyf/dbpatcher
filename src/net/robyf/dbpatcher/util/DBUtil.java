@@ -29,7 +29,10 @@ import java.util.List;
 
 import net.robyf.dbpatcher.LogFactory;
 
-
+/**
+ * @since 0.9.0
+ * @author Roberto Fasciolo
+ */
 public final class DBUtil {
 
     static {

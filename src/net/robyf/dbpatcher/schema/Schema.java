@@ -32,8 +32,10 @@ import java.util.Set;
 import net.robyf.dbpatcher.parser.ScriptParser;
 import net.robyf.dbpatcher.util.DirUtil;
 
-
-
+/**
+ * @since 0.9.0
+ * @author Roberto Fasciolo
+ */
 public final class Schema {
     
     private final File schemaRootDirectory;

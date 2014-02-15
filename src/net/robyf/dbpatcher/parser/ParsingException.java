@@ -19,6 +19,10 @@
  */
 package net.robyf.dbpatcher.parser;
 
+/**
+ * @since 0.9.0
+ * @author Roberto Fasciolo
+ */
 public final class ParsingException extends RuntimeException {
 
     public ParsingException(final String message, final Throwable cause) {

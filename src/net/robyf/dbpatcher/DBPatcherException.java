@@ -19,6 +19,10 @@
  */
 package net.robyf.dbpatcher;
 
+/**
+ * @since 0.9.0
+ * @author Roberto Fasciolo
+ */
 public class DBPatcherException extends Exception {
 
     public DBPatcherException(final String message, final Throwable cause) {
