@@ -381,6 +381,9 @@
             <fileset file="${zip.src.file}" />
 -->
             <fileset dir="${site.dir}" />
+        	<fileset file="${jar.file}" />
+        	<fileset file="${jar.full.file}" />
+        	<fileset file="${jar.sources.file}" />
         </ftp>
     </target>
 
