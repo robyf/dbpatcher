@@ -3,7 +3,7 @@
     <section id="documentation" label="Documentation">
         <page id="overview" label="Overview" file="index" />
         <page id="dependencies" label="Dependencies" file="dependencies" />
-        <page id="userguide" label="User Guide" file="userguide" />
+        <page id="userguide" label="User's Guide" file="userguide" />
 <!-- 
         <page id="anttask" label="Ant Task" file="anttask" />
 -->
