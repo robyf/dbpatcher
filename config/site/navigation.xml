@@ -6,8 +6,8 @@
 <!-- 
         <page id="userguide" label="User Guide" file="userguide" />
         <page id="anttask" label="Ant Task" file="anttask" />
-        <page id="download" label="Download" file="download" />
 -->
+        <page id="download" label="Download" file="download" />
     </section>
     <section id="reports" label="Project reports">
         <link id="javadoc" label="JavaDocs" url="javadoc/index.html" newwindow="true" />
