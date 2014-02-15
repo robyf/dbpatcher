@@ -70,6 +70,9 @@
     </target>
 	
 	<target name="jar" unless="test.fail" depends="compile">
+        <tstamp>
+            <format property="date" pattern="dd.MM.yyyy HH:mm" locale="fi" />
+        </tstamp>
 		<manifestclasspath property="jar.classpath" jarfile="${lib.dir}/ant.jar">
 			<classpath>
 				<pathelement location="${lib.dir}/." />
@@ -83,7 +86,7 @@
         <jar destfile="${jar.full.file}">
             <manifest>
                 <attribute name="Implementation-Title" value="${application.name}" />
-                <attribute name="Implementation-Version" value="${date}" />
+                <attribute name="Implementation-Version" value="${version} (${date})" />
                 <attribute name="Implementation-Vendor" value="Roberto Fasciolo" />
                 <attribute name="Class-Path" value="." />
             	<attribute name="Rsrc-Class-Path" value="${jar.correctedclasspath}" />
@@ -100,12 +103,12 @@
                 <include name="*.jar" />
                 <exclude name="ant.jar" />
             </fileset>
+            <zipfileset dir="${config.dir}" prefix="META-INF" includes="COPYING.txt" />
 		</jar>
         <jar destfile="${jar.file}">
-            <!-- http://java.sun.com/developer/Books/javaprogramming/JAR/basics/manifest.html -->
             <manifest>
                 <attribute name="Implementation-Title" value="${application.name}" />
-                <attribute name="Implementation-Version" value="${date}" />
+                <attribute name="Implementation-Version" value="${version} (${date})" />
                 <attribute name="Implementation-Vendor" value="Roberto Fasciolo" />
                 <attribute name="Main-Class" value="net.robyf.dbpatcher.Launcher" />
             </manifest>
@@ -114,6 +117,21 @@
                 <include name="**/*" />
             </fileset>
             <zipfileset dir="${config.dir}" prefix="net/robyf/dbpatcher" includes="dbpatcher.properties" />
+            <zipfileset dir="${config.dir}" prefix="META-INF" includes="COPYING.txt" />
+        </jar>
+        <jar destfile="${jar.sources.file}">
+            <manifest>
+                <attribute name="Implementation-Title" value="${application.name}" />
+                <attribute name="Implementation-Version" value="${version} (${date})" />
+                <attribute name="Implementation-Vendor" value="Roberto Fasciolo" />
+                <attribute name="Main-Class" value="net.robyf.dbpatcher.Launcher" />
+            </manifest>
+            
+            <fileset dir="${source.dir}">
+                <include name="**/*" />
+            </fileset>
+            <zipfileset dir="${config.dir}" prefix="net/robyf/dbpatcher" includes="dbpatcher.properties" />
+            <zipfileset dir="${config.dir}" prefix="META-INF" includes="COPYING.txt" />
         </jar>
 	</target>
 
