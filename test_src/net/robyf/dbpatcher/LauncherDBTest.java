@@ -7,7 +7,6 @@ import java.sql.Connection;
 import java.util.LinkedList;
 import java.util.List;
 
-import net.robyf.dbpatcher.Launcher;
 import net.robyf.dbpatcher.util.Column;
 import net.robyf.dbpatcher.util.DBTestUtil;
 import net.robyf.dbpatcher.util.DBUtil;

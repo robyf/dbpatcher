@@ -9,12 +9,6 @@ import static org.junit.Assert.fail;
 import java.io.File;
 import java.nio.charset.Charset;
 
-import net.robyf.dbpatcher.AntLauncher;
-import net.robyf.dbpatcher.DBPatcher;
-import net.robyf.dbpatcher.DBPatcherException;
-import net.robyf.dbpatcher.DBPatcherFactory;
-import net.robyf.dbpatcher.Parameters;
-
 import org.apache.tools.ant.BuildException;
 import org.easymock.EasyMock;
 import org.junit.After;

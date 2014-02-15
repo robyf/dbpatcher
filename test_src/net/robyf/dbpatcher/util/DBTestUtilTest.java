@@ -11,10 +11,6 @@ import java.util.LinkedList;
 import java.util.List;
 
 import net.robyf.dbpatcher.TestConfig;
-import net.robyf.dbpatcher.util.Column;
-import net.robyf.dbpatcher.util.DBUtil;
-import net.robyf.dbpatcher.util.MySqlUtil;
-import net.robyf.dbpatcher.util.UtilException;
 
 import org.junit.After;
 import org.junit.Test;

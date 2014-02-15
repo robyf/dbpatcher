@@ -13,9 +13,6 @@ import java.util.Collections;
 import java.util.List;
 
 import net.robyf.dbpatcher.TestConfig;
-import net.robyf.dbpatcher.util.DBUtil;
-import net.robyf.dbpatcher.util.MySqlUtil;
-import net.robyf.dbpatcher.util.UtilException;
 
 import org.easymock.EasyMock;
 import org.junit.After;

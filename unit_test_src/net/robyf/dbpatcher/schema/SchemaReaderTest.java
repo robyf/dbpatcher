@@ -8,9 +8,6 @@ import java.io.File;
 import java.nio.charset.Charset;
 import java.util.Set;
 
-import net.robyf.dbpatcher.schema.Schema;
-import net.robyf.dbpatcher.schema.SchemaException;
-import net.robyf.dbpatcher.schema.SchemaReader;
 import net.robyf.dbpatcher.util.UtilException;
 
 import org.junit.Test;

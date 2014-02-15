@@ -8,9 +8,6 @@ import java.sql.Connection;
 import java.util.LinkedList;
 import java.util.List;
 
-import net.robyf.dbpatcher.DBPatcherException;
-import net.robyf.dbpatcher.DBPatcherImpl;
-import net.robyf.dbpatcher.Parameters;
 import net.robyf.dbpatcher.util.Column;
 import net.robyf.dbpatcher.util.DBTestUtil;
 import net.robyf.dbpatcher.util.DBUtil;
@@ -87,7 +84,7 @@ public final class DBPatcherImplTest {
             assertEquals(3, tables.size());
             assertTrue(tables.contains("DATABASE_VERSION"));
             assertTrue(tables.contains("MYTABLE"));
-            assertTrue(tables.contains("MAIL_MESSAGES"));
+            assertTrue(tables.contains("ARTISTS"));
             
             assertEquals(new Long(2), DBUtil.getDatabaseVersion(connection));
 
@@ -97,16 +94,9 @@ public final class DBPatcherImplTest {
             assertEquals(expected, DBTestUtil.getColumnsFor("MYTABLE", connection));
 
             expected = new LinkedList<Column>();
-            expected.add(new Column("MAIL_MESSAGE_ID", "BIGINT", 20, false));
-            expected.add(new Column("TYPE", "VARCHAR", 10, false));
-            expected.add(new Column("STATE", "VARCHAR", 10, false));
-            expected.add(new Column("FROM", "VARCHAR", 256, false));
-            expected.add(new Column("TO", "VARCHAR", 256, false));
-            expected.add(new Column("SUBJECT", "VARCHAR", 256, false));
-            expected.add(new Column("BODY", "VARCHAR", 16777215, true));
-            expected.add(new Column("HTML_BODY", "VARCHAR", 16777215, true));
-            expected.add(new Column("CREATION_TIME", "DATETIME", 19, true));
-            assertEquals(expected, DBTestUtil.getColumnsFor("MAIL_MESSAGES", connection));
+            expected.add(new Column("ARTIST_ID", "BIGINT", 20, false));
+            expected.add(new Column("NAME", "VARCHAR", 256, false));
+            assertEquals(expected, DBTestUtil.getColumnsFor("ARTISTS", connection));
         } finally {
             DBUtil.closeConnection(connection);
         }
@@ -133,7 +123,7 @@ public final class DBPatcherImplTest {
             assertEquals(3, tables.size());
             assertTrue(tables.contains("DATABASE_VERSION"));
             assertTrue(tables.contains("MYTABLE"));
-            assertTrue(tables.contains("MAIL_MESSAGES"));
+            assertTrue(tables.contains("ARTISTS"));
             
             assertEquals(new Long(2), DBUtil.getDatabaseVersion(connection));
 
@@ -143,16 +133,9 @@ public final class DBPatcherImplTest {
             assertEquals(expected, DBTestUtil.getColumnsFor("MYTABLE", connection));
 
             expected = new LinkedList<Column>();
-            expected.add(new Column("MAIL_MESSAGE_ID", "BIGINT", 20, false));
-            expected.add(new Column("TYPE", "VARCHAR", 10, false));
-            expected.add(new Column("STATE", "VARCHAR", 10, false));
-            expected.add(new Column("FROM", "VARCHAR", 256, false));
-            expected.add(new Column("TO", "VARCHAR", 256, false));
-            expected.add(new Column("SUBJECT", "VARCHAR", 256, false));
-            expected.add(new Column("BODY", "VARCHAR", 16777215, true));
-            expected.add(new Column("HTML_BODY", "VARCHAR", 16777215, true));
-            expected.add(new Column("CREATION_TIME", "DATETIME", 19, true));
-            assertEquals(expected, DBTestUtil.getColumnsFor("MAIL_MESSAGES", connection));
+            expected.add(new Column("ARTIST_ID", "BIGINT", 20, false));
+            expected.add(new Column("NAME", "VARCHAR", 256, false));
+            assertEquals(expected, DBTestUtil.getColumnsFor("ARTISTS", connection));
         } finally {
             DBUtil.closeConnection(connection);
         }
@@ -210,7 +193,7 @@ public final class DBPatcherImplTest {
             assertEquals(3, tables.size());
             assertTrue(tables.contains("DATABASE_VERSION"));
             assertTrue(tables.contains("MYTABLE"));
-            assertTrue(tables.contains("MAIL_MESSAGES"));
+            assertTrue(tables.contains("ARTISTS"));
             
             assertEquals(new Long(2), DBUtil.getDatabaseVersion(connection));
         } finally {
@@ -260,7 +243,7 @@ public final class DBPatcherImplTest {
             assertEquals(3, tables.size());
             assertTrue(tables.contains("DATABASE_VERSION"));
             assertTrue(tables.contains("MYTABLE"));
-            assertTrue(tables.contains("MAIL_MESSAGES"));
+            assertTrue(tables.contains("ARTISTS"));
             
             assertEquals(new Long(2), DBUtil.getDatabaseVersion(connection));
 
@@ -270,16 +253,9 @@ public final class DBPatcherImplTest {
             assertEquals(expected, DBTestUtil.getColumnsFor("MYTABLE", connection));
 
             expected = new LinkedList<Column>();
-            expected.add(new Column("MAIL_MESSAGE_ID", "BIGINT", 20, false));
-            expected.add(new Column("TYPE", "VARCHAR", 10, false));
-            expected.add(new Column("STATE", "VARCHAR", 10, false));
-            expected.add(new Column("FROM", "VARCHAR", 256, false));
-            expected.add(new Column("TO", "VARCHAR", 256, false));
-            expected.add(new Column("SUBJECT", "VARCHAR", 256, false));
-            expected.add(new Column("BODY", "VARCHAR", 16777215, true));
-            expected.add(new Column("HTML_BODY", "VARCHAR", 16777215, true));
-            expected.add(new Column("CREATION_TIME", "DATETIME", 19, true));
-            assertEquals(expected, DBTestUtil.getColumnsFor("MAIL_MESSAGES", connection));
+            expected.add(new Column("ARTIST_ID", "BIGINT", 20, false));
+            expected.add(new Column("NAME", "VARCHAR", 256, false));
+            assertEquals(expected, DBTestUtil.getColumnsFor("ARTISTS", connection));
         } finally {
             DBUtil.closeConnection(connection);
         }

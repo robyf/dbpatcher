@@ -5,10 +5,6 @@ import static org.junit.Assert.assertTrue;
 
 import java.io.File;
 
-import net.robyf.dbpatcher.util.DirUtil;
-import net.robyf.dbpatcher.util.UtilException;
-import net.robyf.dbpatcher.util.ZipUtil;
-
 import org.junit.After;
 import org.junit.Test;
 
@@ -38,10 +34,10 @@ public final class ZipUtilTest {
         assertTrue(dir2.exists());
         assertTrue(dir2.isDirectory());
 
-        File file2 = new File(dir2, "mailmessages.sql");
+        File file2 = new File(dir2, "01_artists.sql");
         assertTrue(file2.exists());
         assertTrue(file2.isFile());
-        assertEquals(645L, file2.length());
+        assertEquals(227L, file2.length());
     }
 
     @Test (expected = UtilException.class)

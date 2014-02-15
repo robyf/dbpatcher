@@ -5,9 +5,6 @@ import static org.junit.Assert.assertTrue;
 
 import java.io.File;
 
-import net.robyf.dbpatcher.util.DirUtil;
-import net.robyf.dbpatcher.util.ZipUtil;
-
 import org.junit.After;
 import org.junit.Test;
 

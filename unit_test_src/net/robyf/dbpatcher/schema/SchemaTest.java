@@ -11,10 +11,6 @@ import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
 
-import net.robyf.dbpatcher.schema.Schema;
-import net.robyf.dbpatcher.schema.SchemaException;
-import net.robyf.dbpatcher.schema.SchemaReader;
-
 import org.junit.Test;
 
 public final class SchemaTest {

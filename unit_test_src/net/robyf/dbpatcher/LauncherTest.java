@@ -7,12 +7,6 @@ import static org.junit.Assert.assertTrue;
 
 import java.nio.charset.Charset;
 
-import net.robyf.dbpatcher.DBPatcher;
-import net.robyf.dbpatcher.DBPatcherException;
-import net.robyf.dbpatcher.DBPatcherFactory;
-import net.robyf.dbpatcher.Launcher;
-import net.robyf.dbpatcher.Parameters;
-
 import org.easymock.EasyMock;
 import org.junit.After;
 import org.junit.Test;

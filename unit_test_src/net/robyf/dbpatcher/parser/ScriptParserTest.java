@@ -7,9 +7,6 @@ import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.List;
 
-import net.robyf.dbpatcher.parser.ParsingException;
-import net.robyf.dbpatcher.parser.ScriptParser;
-
 import org.junit.Test;
 
 public final class ScriptParserTest {
