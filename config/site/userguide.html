@@ -56,8 +56,53 @@ create table MYTABLE (
 </p>
 <a name="ant"></a><h3>Running from ant</h3>
 <p>
-    TODO.
+    To use the task you must include in the classpath both <code>dbpatcher.jar</code> and all its
+    dependencies. Dependencies must be in the classpath also when using the standalone jar.<br/>
+    To use the task in a buildfile you need the following <code>taskdef</code> declaration:
 </p>
+<pre class="code"><code>&lt;taskdef name="dbpatcher" resource="net/robyf/dbpatcher/dbpatcher.properties" classpath="path.to.dbpatcher.jar" /&gt;</code></pre>
+<h4>Parameters</h4>
+<p>
+    All parameters are required unless specified.
+</p>
+<table border="0" cellspacing="2" cellpadding="2" class="dependencies">
+  <tr class="header">
+    <th>Attribute</th>
+    <th>Description</th>
+  </tr>
+  <tr class="even">
+    <td>username</td>
+    <td>Database user's username</td>
+  </tr>
+  <tr class="odd">
+    <td>password</td>
+    <td>Database user's password</td>
+  </tr>
+  <tr class="even">
+    <td>database</td>
+    <td>Database name</td>
+  </tr>
+  <tr class="odd">
+    <td>schemaRoot</td>
+    <td>Path to a database definition. It can be either a directory or a zip file</td>
+  </tr>
+  <tr class="even">
+    <td>version</td>
+    <td>Required increment version number (optional, by default all the increments are applied)</td>
+  </tr>
+  <tr class="odd">
+    <td>rollbackIfError</td>
+    <td>Specify if a database should be rolled back in case of error when applying an increment (optional, default = false)</td>
+  </tr>
+  <tr class="even">
+    <td>simulationMode</td>
+    <td>Specify is simulation mode must be used (optional, default = false)</td>
+  </tr>
+  <tr class="odd">
+    <td>charset</td>
+    <td>Character set used for reading the scripts (optional, default = ISO-8859-1)</td>
+  </tr>
+</table>
 <!-- 
 <p>
     It uses velocity for render pages and an xml file for defining the site navigation.
