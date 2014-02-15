@@ -7,17 +7,16 @@
 </p>
 <a name="databaseDefinition"></a><h3>Database definition</h3>
 <p>
-    A database is defined by a structure of directories (one per incremental step) containing SQL scrips as in the following example:
+    A database is defined by a structure of directories (one per incremental step) containing SQL
+    scrips as in the following example:
 </p>
 <ul>
-    <li>1</li>
-    <li>
+    <li>1
         <ul>
             <li>script.sql</li>
         </ul>
     </li>
-    <li>2</li>
-    <li>
+    <li>2
         <ul>
             <li>script1.sql</li>
             <li>script2.sql</li>
@@ -25,8 +24,32 @@
     </li>
 </ul>
 <p>
-    Directory names must be parseable to an integer value.
+    Directory names must be parseable to an integer value. Steps are applied (e.g. the scripts
+    inside the various directories are executed) following the order given by their names, for
+    example: 1, 2, 3 or 01, 02, 03.
 </p>
+<p>
+    Scripts are valid MySQL ones, for example:
+</p>
+<pre class="code"><code>-- Table MYTABLE, just for test
+create table MYTABLE (
+  ID bigint(20) not null primary key,
+  NAME varchar(10) character set latin1 collate latin1_bin NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;</code></pre>
+<p>
+    Commands are delimited by a semicolon (;) character. In case a different delimiter is needed 
+    (for example when defining triggers) a new one can be specified using a special comment:
+</p>
+<pre class="code"><code>--DELIMITER "newdelimiter"</code></pre>
+<p>
+    As in the following example:
+</p>
+<pre class="code"><code>--DELIMITER "//"
+-- Table MYTABLE, just for test
+create table MYTABLE (
+  ID bigint(20) not null primary key,
+  NAME varchar(10) character set latin1 collate latin1_bin NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1//</code></pre>
 <a name="commandLine"></a><h3>Running from command line</h3>
 <p>
     TODO.
