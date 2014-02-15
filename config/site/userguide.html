@@ -102,9 +102,11 @@ Available options:
 </ol>
 <a name="ant"></a><h3>Running from ant</h3>
 <p>
-    To use the task you must include in the classpath both <code>dbpatcher.jar</code> and all its
-    dependencies. Dependencies must be in the classpath also when using the standalone jar.<br/>
-    To use the task in a buildfile you need the following <code>taskdef</code> declaration:
+    <b>dbpatcher</b> can be executed as an ant task if both <code>dbpatcher.jar</code> and all its
+    dependencies are in the ant's classpath. Dependencies must be in the classpath also when using
+    the standalone jar.<br/>
+    In order to use the task in a buildfile the following <code>taskdef</code> declaration must be
+    provided:
 </p>
 <pre class="code"><code>&lt;taskdef name="dbpatcher" resource="net/robyf/dbpatcher/dbpatcher.properties" classpath="path.to.dbpatcher.jar" /&gt;</code></pre>
 <h4>Parameters</h4>
