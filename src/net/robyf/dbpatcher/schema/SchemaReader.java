@@ -65,12 +65,12 @@ public final class SchemaReader {
             throw new SchemaException(schemaRoot.getName() + " is empty");
         }
         
-        Set<Long> versions = new TreeSet<Long>();
+        Set<VersionDir> versions = new TreeSet<VersionDir>();
         boolean foundVersionDirectory = false;
         for (File child : children) {
             if (child.isDirectory()) {
                 try {
-                    versions.add(Long.valueOf(child.getName()));
+                    versions.add(new VersionDir(Long.valueOf(child.getName()), child.getName()));
                     foundVersionDirectory = true;
                     
                     File[] versionScripts = child.listFiles(new FilenameFilter() {

@@ -28,6 +28,7 @@ import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
+import java.util.TreeSet;
 
 import net.robyf.dbpatcher.parser.ScriptParser;
 import net.robyf.dbpatcher.util.DirUtil;
@@ -39,15 +40,20 @@ import net.robyf.dbpatcher.util.DirUtil;
 public final class Schema {
     
     private final File schemaRootDirectory;
+    private final Set<VersionDir> availableVersionDirs;
     private final Set<Long> availableVersions;
     private final Charset charset;
     
     public Schema(final File schemaRoorDirectory,
-                  final Set<Long> availableVersions,
+                  final Set<VersionDir> availableVersions,
                   final boolean cleanupOnShutdown,
                   final Charset charset) {
         this.schemaRootDirectory = schemaRoorDirectory;
-        this.availableVersions = availableVersions;
+        this.availableVersionDirs = availableVersions;
+        this.availableVersions = new TreeSet<Long>();
+        for (VersionDir versionDir : availableVersions) {
+            this.availableVersions.add(versionDir.getVersion());
+        }
         this.charset = charset;
         if (cleanupOnShutdown) {
             Runtime.getRuntime().addShutdownHook(new Hook(this.schemaRootDirectory));
@@ -63,9 +69,17 @@ public final class Schema {
             throw new SchemaException("Version " + version + " not available");
         }
         
+        VersionDir versionDir = null;
+        for (VersionDir dir : this.availableVersionDirs) {
+            if (dir.getVersion().equals(version)) {
+                versionDir = dir;
+                break;
+            }
+        }
+        
         File[] scriptsArray =
                 new File(this.schemaRootDirectory, 
-                         version.toString()).listFiles(new FilenameFilter() {
+                         versionDir.getDirName()).listFiles(new FilenameFilter() {
             
             @Override
             public boolean accept(final File dir, final String name) {

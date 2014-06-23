@@ -78,9 +78,9 @@ public final class SchemaTest {
     }
 
     private Schema createSchemaWith10Versions() {
-        Set<Long> availableVersions = new TreeSet<Long>();
+        Set<VersionDir> availableVersions = new TreeSet<VersionDir>();
         for (long i = 1; i < 11; i++) {
-            availableVersions.add(new Long(i));
+            availableVersions.add(new VersionDir(new Long(i), Long.toString(i)));
         }
         return new Schema(new File("."), availableVersions, false, Charset.forName("ISO-8859-1"));
     }

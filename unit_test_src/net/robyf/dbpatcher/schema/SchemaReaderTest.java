@@ -6,6 +6,9 @@ import static org.junit.Assert.assertTrue;
 
 import java.io.File;
 import java.nio.charset.Charset;
+import java.util.Collections;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Set;
 
 import net.robyf.dbpatcher.util.UtilException;
@@ -58,8 +61,34 @@ public final class SchemaReaderTest {
         assertNotNull(schema);
         Set<Long> versions = schema.getAvailableVersions();
         assertEquals(2, versions.size());
+
         assertTrue(versions.contains(new Long(1)));
+        assertEquals(Collections.singletonList("statement1"),
+                     schema.getStatementsForVersion(new Long(1)));
+
         assertTrue(versions.contains(new Long(2)));
+        List<String> expected = new LinkedList<String>();
+        expected.add("statement2-1");
+        expected.add("statement2-2");
+        assertEquals(expected, schema.getStatementsForVersion(new Long(2)));
+    }
+
+    @Test
+    public void testRead_with_trailing_zeros() {
+        Schema schema = SchemaReader.read(new File("config/test/test04"), CHARSET);
+        assertNotNull(schema);
+        Set<Long> versions = schema.getAvailableVersions();
+        assertEquals(2, versions.size());
+
+        assertTrue(versions.contains(new Long(1)));
+        assertEquals(Collections.singletonList("statement1"),
+                     schema.getStatementsForVersion(new Long(1)));
+
+        assertTrue(versions.contains(new Long(2)));
+        List<String> expected = new LinkedList<String>();
+        expected.add("statement2-1");
+        expected.add("statement2-2");
+        assertEquals(expected, schema.getStatementsForVersion(new Long(2)));
     }
 
 }
