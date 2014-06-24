@@ -1,6 +1,12 @@
 package net.robyf.dbpatcher.schema;
 
-public final class VersionDir implements Comparable<VersionDir> {
+/**
+ * A directory containg a database version.
+ * 
+ * @author Roberto Fasciolo
+ * @since 0.9.1
+ */
+final class VersionDir implements Comparable<VersionDir> {
 
     private final Long version;
     private final String dirName;
