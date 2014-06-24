@@ -11,12 +11,12 @@
     scripts as in the following example:
 </p>
 <ul>
-    <li>1
+    <li>001-first_version
         <ul>
             <li>script.sql</li>
         </ul>
     </li>
-    <li>2
+    <li>002-second_version
         <ul>
             <li>script1.sql</li>
             <li>script2.sql</li>
@@ -26,7 +26,9 @@
 <p>
     Directory names must be parseable to an integer value. Steps are applied (e.g. the scripts
     inside the various directories are executed) following the order given by their names, for
-    example: 1, 2, 3 or 01, 02, 03.
+    example: 1, 2, 3 or 01, 02, 03. Starting from version 0.9.1 also descriptive texts can be
+    added to the directory names using this format &lt;version number&gt;-&lt;text&gt; (for example:
+    001-create, 002-alter_users, 003-insert_data).
 </p>
 <p>
     Scripts are valid MySQL ones, for example:
