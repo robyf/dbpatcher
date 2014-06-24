@@ -61,4 +61,15 @@ public final class VersionDir implements Comparable<VersionDir> {
         return this.getVersion().compareTo(o.getVersion());
     }
 
+    @Override
+    public String toString() {
+        StringBuilder builder = new StringBuilder();
+        builder.append("VersionDir [version=");
+        builder.append(version);
+        builder.append(", dirName=");
+        builder.append(dirName);
+        builder.append("]");
+        return builder.toString();
+    }
+
 }

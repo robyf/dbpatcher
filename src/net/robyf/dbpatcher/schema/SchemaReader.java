@@ -70,7 +70,11 @@ public final class SchemaReader {
         for (File child : children) {
             if (child.isDirectory()) {
                 try {
-                    versions.add(new VersionDir(Long.valueOf(child.getName()), child.getName()));
+                    String name = child.getName();
+                    if (name.indexOf("-") != -1) {
+                        name = name.substring(0, name.indexOf("-"));
+                    }
+                    versions.add(new VersionDir(Long.valueOf(name), child.getName()));
                     foundVersionDirectory = true;
                     
                     File[] versionScripts = child.listFiles(new FilenameFilter() {

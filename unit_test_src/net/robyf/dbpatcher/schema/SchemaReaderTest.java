@@ -91,4 +91,22 @@ public final class SchemaReaderTest {
         assertEquals(expected, schema.getStatementsForVersion(new Long(2)));
     }
 
+    @Test
+    public void testRead_with_descriptive_names() {
+        Schema schema = SchemaReader.read(new File("config/test/test05"), CHARSET);
+        assertNotNull(schema);
+        Set<Long> versions = schema.getAvailableVersions();
+        assertEquals(2, versions.size());
+
+        assertTrue(versions.contains(new Long(1)));
+        assertEquals(Collections.singletonList("statement1"),
+                     schema.getStatementsForVersion(new Long(1)));
+
+        assertTrue(versions.contains(new Long(2)));
+        List<String> expected = new LinkedList<String>();
+        expected.add("statement2-1");
+        expected.add("statement2-2");
+        assertEquals(expected, schema.getStatementsForVersion(new Long(2)));
+    }
+
 }
