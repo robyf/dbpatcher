@@ -282,4 +282,33 @@ public final class DBPatcherImplTest {
         }
     }
 
+    @Test
+    public void testPatch_simple03_empty_db() throws Exception {
+        MySqlUtil.createDatabase(DATABASE_NAME, USERNAME, PASSWORD);
+        
+        Parameters parameters = new Parameters();
+        parameters.setDatabaseName(DATABASE_NAME);
+        parameters.setUsername(USERNAME);
+        parameters.setPassword(PASSWORD);
+        parameters.setSchemaPath("config/test/simple03");
+        this.patcher.patch(parameters);
+        
+        Connection connection = DBTestUtil.getConnection(DATABASE_NAME);
+        try {
+            List<String> tables = DBUtil.getTables(connection);
+            assertEquals(2, tables.size());
+            assertTrue(tables.contains("DATABASE_VERSION"));
+            assertTrue(tables.contains("MYTABLE"));
+            
+            assertEquals(new Long(1), DBUtil.getDatabaseVersion(connection));
+
+            List<Column> expected = new LinkedList<Column>();
+            expected.add(new Column("ID", "BIGINT", 20, false));
+            expected.add(new Column("NAME", "VARCHAR", 10, false));
+            assertEquals(expected, DBTestUtil.getColumnsFor("MYTABLE", connection));
+        } finally {
+            DBUtil.closeConnection(connection);
+        }
+    }
+
 }
