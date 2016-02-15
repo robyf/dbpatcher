@@ -368,7 +368,7 @@
         <ftp verbose="yes" passive="yes" password="${ftp.password}" server="${ftp.server}" userid="${ftp.username}" remotedir="${ftp.j2h.dir}">
             <fileset dir="${sources.report.dir}" />
         </ftp>
-        <ftp verbose="yes" passive="yes" password="${ftp.password}" server="${ftp.server}" userid="${ftp.username}" remotedir="${ftp.unit.dir}" action="mkdir" />
+        <ftp verbose="yes" passive="yes" password="${ftp.password}" server="${ftp.server}" userid="${ftp.username}" remotedir="${ftp.junit.dir}" action="mkdir" />
     	<ftp verbose="yes" passive="yes" password="${ftp.password}" server="${ftp.server}" userid="${ftp.username}" remotedir="${ftp.junit.dir}">
             <fileset dir="${test.unit.report.dir}" />
         </ftp>
