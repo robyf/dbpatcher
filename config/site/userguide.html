@@ -1,12 +1,12 @@
 <h1>dbpatcher - User's guide</h1>
 <h3>Table of content</h3>
-<p>
+<p class="lead">
     <a href="#databaseDefinition">Database definition</a><br/>
     <a href="#commandLine">Running from command line</a><br/>
     <a href="#ant">Running from ant</a><br/>
 </p>
 <a name="databaseDefinition"></a><h3>Database definition</h3>
-<p>
+<p class="lead">
     A database is defined by a structure of directories (one per incremental step) containing SQL
     scripts as in the following example:
 </p>
@@ -23,14 +23,14 @@
         </ul>
     </li>
 </ul>
-<p>
+<p class="lead">
     Directory names must be parseable to an integer value. Steps are applied (e.g. the scripts
     inside the various directories are executed) following the order given by their names, for
     example: 1, 2, 3 or 01, 02, 03. Starting from version 0.9.1 also descriptive texts can be
     added to the directory names using this format &lt;version number&gt;-&lt;text&gt; (for example:
     001-create, 002-alter_users, 003-insert_data).
 </p>
-<p>
+<p class="lead">
     Scripts are valid MySQL ones, for example:
 </p>
 <pre class="code"><code>-- Table MYTABLE, just for test
@@ -38,12 +38,12 @@ create table MYTABLE (
   ID bigint(20) not null primary key,
   NAME varchar(10) character set latin1 collate latin1_bin NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;</code></pre>
-<p>
+<p class="lead">
     Commands are delimited by a semicolon (;) character. In case a different delimiter is needed 
     (for example when defining triggers) a new one can be specified using a special comment:
 </p>
 <pre class="code"><code>--DELIMITER "newdelimiter"</code></pre>
-<p>
+<p class="lead">
     As in the following example:
 </p>
 <pre class="code"><code>--DELIMITER "//"
@@ -52,19 +52,19 @@ create table MYTABLE (
   ID bigint(20) not null primary key,
   NAME varchar(10) character set latin1 collate latin1_bin NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1//</code></pre>
-<p>
+<p class="lead">
     Scripts are run in case-sensitive alphabetical order.
 </p>
 <a name="commandLine"></a><h3>Running from command line</h3>
-<p>
+<p class="lead">
     <b>dbpatcher</b> can be executed from command line by either using the standalone jar:
 </p>
 <pre class="code"><code>java -jar dbpatcher-standalone.jar</code></pre>
-<p>
+<p class="lead">
     or by using the regular jar and all the dependencies:
 </p>
 <pre class="code"><code>java -cp dbpatcher.jar:dependency.jar:...:dependency.jar net.robyf.dbpatcher.Launcher</code></pre>
-<p>
+<p class="lead">
     In both cases the same set of parameters must be provided as per the following usage informations:
 </p>
 <pre class="code"><code>usage: java -jar dbpatcher.jar -u username -p password -d database_name
@@ -80,7 +80,7 @@ Available options:
  -u,--username &lt;arg&gt;        Database username
  -v,--to-version &lt;arg&gt;      Target version number
 </code></pre>
-<p>
+<p class="lead">
     The database must be residing on localhost (network is not supported) and the user used must
     have full control over it (and also permissions to create and drop new databases).<br/>
     <code>schema_root</code> is the full path to a database definition. It can be either a directory
@@ -88,13 +88,13 @@ Available options:
     The process' exit code indicates if the operation was successful or not (0 indicates success,
     every other value failure).
 </p>
-<p>
+<p class="lead">
     Note that the tool tracks what increments have been applied in a database table, called
     <code>DATABASE_VERSION</code>. <b>dbpatcher</b> itself creates it and it must not be altered
     manually in any way.
 </p>
 <h4>Simulation mode</h4>
-<p>
+<p class="lead">
     In order to be sure, for example in an automated deployment to production procedure, that the
     SQL scripts work properly and don't break the database <code>simulation mode</code> has been
     introduced. When <b>dbpatcher</b> is run in this mode it first takes a backup of the target
@@ -111,7 +111,7 @@ Available options:
     <li>Start up the application</li>
 </ol>
 <a name="ant"></a><h3>Running from ant</h3>
-<p>
+<p class="lead">
     <b>dbpatcher</b> can be executed as an ant task if both <code>dbpatcher.jar</code> and all its
     dependencies are in the ant's classpath. Dependencies must be in the classpath also when using
     the standalone jar.<br/>
@@ -120,7 +120,7 @@ Available options:
 </p>
 <pre class="code"><code>&lt;taskdef name="dbpatcher" resource="net/robyf/dbpatcher/dbpatcher.properties" classpath="path.to.dbpatcher.jar" /&gt;</code></pre>
 <h4>Parameters</h4>
-<p>
+<p class="lead">
     All parameters are required unless specified.
 </p>
 <table border="0" cellspacing="2" cellpadding="2" class="dependencies">

@@ -1,35 +1,35 @@
 <h1>dbpatcher</h1>
-<p>
+<p class="lead">
     <b>dbpatcher</b> is a tool for applying incremental updates to a MySQL database.
 </p>
-<p>
+<p class="lead">
     It has originally developed for the continuous deployment procedure of a site developed by a
     startup the tool's author was involved with. It was used for the automated nightly deployment
     to production procedure.
 </p>
-<p>
+<p class="lead">
     In agreement with the mentioned startup the code has been forked and made open source. It is
     currently maintained and developed by its original author.
 </p>
-<p>
+<p class="lead">
     <b>dbpatcher</b> is released under the terms of <a href="http://www.gnu.org/" target="_new">GNU</a>
     <a href="http://www.gnu.org/copyleft/gpl.html" target="_new">General Public License</a>.
 </p>
 <h2>Why dbpatcher?</h2>
-<p>
+<p class="lead">
     Some years ago in my company we had a well established continuous integration and continuous
     deployment procedure (most likely the first of its kind in Finland): at every build our
     automated test suite (about 10% unit tests, the rest functional tests testing both the
     successful and the error scenarios) was executed and, if successful, the artifacts were
     deployed to production the next night a 4AM (when users were not using our site).
 </p>
-<p>
+<p class="lead">
     This worked really well for the application side, but had the big flaw that (backwards
     incompatible) database changes had to be applied manually to the production database (which
     meant that we had to stop the application and interrupt the service for our users, deploy the
     database changes and the application manually and the start up the service again).
 </p>
-<p>
+<p class="lead">
     That's why we decided to spend some time developing <b>dbpatcher</b>. It fulfills the following
     use cases: 
 </p>
@@ -38,7 +38,7 @@
     <li>Ability to apply incremental updates to an existing database</li>
     <li>Ability to roll back the updates in case of errors applying them</li>
 </ul>
-<p>
+<p class="lead">
     The last use case was there as a safe-guard in order not to leave the service unusable for our
     users during the automated overnight deployments. <b>dbpatcher</b> has been used in production
     for years without having any problems, until our service has been shut down.

@@ -359,15 +359,20 @@
 	</target>
     
     <target name="ftppublish">
+        <ftp verbose="yes" passive="yes" password="${ftp.password}" server="${ftp.server}" userid="${ftp.username}" remotedir="${ftp.basedir}" action="mkdir" />
+        <ftp verbose="yes" passive="yes" password="${ftp.password}" server="${ftp.server}" userid="${ftp.username}" remotedir="${ftp.javadoc.dir}" action="mkdir" />
     	<ftp verbose="yes" passive="yes" password="${ftp.password}" server="${ftp.server}" userid="${ftp.username}" remotedir="${ftp.javadoc.dir}">
             <fileset dir="${javadoc.dir}" />
         </ftp>
+        <ftp verbose="yes" passive="yes" password="${ftp.password}" server="${ftp.server}" userid="${ftp.username}" remotedir="${ftp.j2h.dir}" action="mkdir" />
         <ftp verbose="yes" passive="yes" password="${ftp.password}" server="${ftp.server}" userid="${ftp.username}" remotedir="${ftp.j2h.dir}">
             <fileset dir="${sources.report.dir}" />
         </ftp>
+        <ftp verbose="yes" passive="yes" password="${ftp.password}" server="${ftp.server}" userid="${ftp.username}" remotedir="${ftp.unit.dir}" action="mkdir" />
     	<ftp verbose="yes" passive="yes" password="${ftp.password}" server="${ftp.server}" userid="${ftp.username}" remotedir="${ftp.junit.dir}">
             <fileset dir="${test.unit.report.dir}" />
         </ftp>
+        <ftp verbose="yes" passive="yes" password="${ftp.password}" server="${ftp.server}" userid="${ftp.username}" remotedir="${ftp.cobertura.dir}" action="mkdir" />
         <ftp verbose="yes" passive="yes" password="${ftp.password}" server="${ftp.server}" userid="${ftp.username}" remotedir="${ftp.cobertura.dir}">
             <fileset dir="${test.coverage.report.dir}" />
         </ftp>
@@ -389,5 +394,8 @@
 
     <target name="publish" 
             depends="clean,compile,dist,fail-if-tests-failed,site,ftppublish" />
+
+    <target name="publish2" 
+            depends="clean,compile,dist,fail-if-tests-failed,site" />
 
 </project>

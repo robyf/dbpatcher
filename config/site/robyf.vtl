@@ -1,96 +1,132 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
-  <head>
-    <title>The RobyF's Software Corner - ${projectName}</title>
-    <link rel="stylesheet" href="../software.css" />
-  </head>
-  <body>
-    <table width="100%" border="0" cellspacing="0" cellpadding="0">
-      <tr>
-        <td class="header_logo">
-          <a href="../index.html"><img src="../images/newlogo.png" width="161" height="92" alt="The RobyF's Software Corner" /></a>
-        </td>
-        <td class="header_link">
-          &nbsp;
-        </td>
-      </tr>
-    </table>
-    <div class="header_link">
-        <a href="../origin.html">The Origin</a>&nbsp;&nbsp;&nbsp;
-        <a href="../windows.html">Windows</a>&nbsp;&nbsp;&nbsp;
-        <a href="../linux.html">Linux</a>&nbsp;&nbsp;&nbsp;
-        <a href="../java.html">Java</a>&nbsp;&nbsp;&nbsp;
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>The Robyf's Circuit - Software - vsitegen</title>
+
+    <link href="../../css/bootstrap.min.css" rel="stylesheet">
+    <link href="../../css/bootstrap-theme.min.css" rel="stylesheet">
+
+    <link href="../../css/theme.css" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+        <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <link rel="apple-touch-icon" sizes="57x57" href="../../images/apple-touch-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="../../images/apple-touch-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="../../images/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="../../images/apple-touch-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="../../images/apple-touch-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="../../images/apple-touch-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="../../images/apple-touch-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="../../images/apple-touch-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="../../images/apple-touch-icon-180x180.png">
+    <link rel="icon" type="image/png" href="../../images/favicon-32x32.png" sizes="32x32">
+    <link rel="icon" type="image/png" href="../../images/android-chrome-192x192.png" sizes="192x192">
+    <link rel="icon" type="image/png" href="../../images/favicon-96x96.png" sizes="96x96">
+    <link rel="icon" type="image/png" href="../../images/favicon-16x16.png" sizes="16x16">
+    <link rel="manifest" href="../../images/manifest.json">
+    <link rel="shortcut icon" href="../../images/favicon.ico">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="msapplication-TileImage" content="../../images/mstile-144x144.png">
+    <meta name="msapplication-config" content="../../images/browserconfig.xml">
+    <meta name="theme-color" content="#ffffff">
+</head>
+
+<body role="document">
+    
+    <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="index.html">Home page</a>
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="../../index.html">Home</a></li>
+                    <li><a href="../../about-me.html">About me</a></li>
+                    <li><a href="../../photography.html">Photography</a></li>
+                    <li><a href="../../music.html">Music</a></li>
+                    <li>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Graphics <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="../../graphics-web.html">Web</a></li>
+                            <li><a href="../../graphics-animations.html">Animations</a></li>
+                        </ul>
+                    </li>
+                    <li class="active"><a href="../../software.html">Software</a></li>
+                    <li><a href="../../thoughts.html">Thoughts</a></li>
+                </ul>
+            </div>
+        </div>
     </div>
-    <table class="menu">
+
+    <section class="container-main software" role="main">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3 col-sm-3 sw-menu">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".localnav-collapse">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <h3>vsitegen</h3>
+                    </div>
+                    <div class="localnav-collapse collapse">
 #foreach ( $section in $navigation.sections )
-      <tr>
-        <td class="header">
-          ${section.label}<br/>
-          <hr/>
-        </td>
-      </tr>
-      <tr>
-        <td>
+                        <h4>${section.label}</h4>
 #foreach ( $element in $section.elements )
 #if ( $element.page )
 #if ( $element.id == $pageId)
-          <b>${element.label}</b><br/>
+                        <b>${element.label}</b><br>
 #else
-          <a href="${element.file}.html">${element.label}</a><br/>
+                        <a href="${element.file}.html">${element.label}</a><br>
 #end
 #elseif ( $element.link )
 #if ( $element.newWindow )
-          <a href="${element.url}" target="_new">${element.label}</a> <img src="../images/newwindow.png" width="11" height="9" alt="New window" /><br/>
+                        <a href="${element.url}" target="_new">${element.label}</a> <img src="../../images/newwindow.png" width="11" height="9" alt="New window"><br>
 #else
-          <a href="${element.url}">${element.label}</a>
+                        <a href="${element.url}">${element.label}</a><br>
 #end
 #end
 #end
-          <br/>
-        </td>
-      </tr>
+                        <hr>
 #end
-      <tr>
-        <td class="header">
-          Legend<br/>
-          <hr/>
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <img src="../images/newwindow.png" width="11" height="9" alt="New window" /> Opens in new window<br/>
-          <br/>
-        </td>
-      </tr>
-    </table>
-    <div id="body">
+                        <h4>Legend</h4>
+                        <img src="../../images/newwindow.png" width="11" height="9" alt="New window" /> Opens in new window<br/>
+                    </div>
+                </div>
+                <div class="col-md-9 col-sm-9 sw-main">
 ${content}
-    </div>
-    <div class="clear"><hr></hr></div>
-    <hr class="footer" />
-    <table border="0" cellpadding="0" cellspacing="0" class="footer">
-      <tr>
-        <td class="footer_left">
-          Copyright &copy; 2014 Roberto Fasciolo<br/>
-          Generated by vsitegen on ${generationTime}.
-        </td>
-        <td class="footer_right">
-          <a href="http://validator.w3.org/check?uri=referer"><img src="../images/valid-xhtml10.png" alt="Valid XHTML 1.0 Strict" height="31" width="88" /></a>
-          <img src="../images/valid-css.png" alt="Valid CSS" height="31" width="88" />
-        </td>
-      </tr>
-    </table>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <footer class="footer">
+        <div class="container-fluid">
+            <p class="pull-right"><a href="#">Back to top</a>
+            <p>&copy; 2016 Roberto Fasciolo - Generated by vsitegen on ${generationTime}.</p>
+        </div>
+    </footer>
 
-<script type="text/javascript">
-var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
-document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
-</script>
-<script type="text/javascript">
-try {
-var pageTracker = _gat._getTracker("UA-7761635-2");
-pageTracker._trackPageview();
-} catch(err) {}</script>
+    <script type="text/javascript" src="../../js/jquery-2.2.0.min.js"></script>
+    <script type="text/javascript" src="../../js/bootstrap.min.js"></script>
 
-  </body>
+</body>
 </html>
