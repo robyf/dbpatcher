@@ -1,4 +1,12 @@
+plugins {
+    id 'de.aaschmid.cpd' version '0.5'
+    id "com.bmuschko.java2html" version "2.0"
+    id "net.saliman.cobertura" version "2.3.0"
+}
+
 apply plugin: 'java'
+apply plugin: 'checkstyle'
+apply plugin: 'jdepend'
 
 wrapper {
     gradleVersion = '2.11'
@@ -9,8 +17,11 @@ repositories {
 }
 
 configurations {
+/*
     integrationTestCompile.extendsFrom testCompile
     integrationTestRuntime.extendsFrom testRuntime
+*/
+    javancss
 }
 
 dependencies {
@@ -21,6 +32,11 @@ dependencies {
     testCompile group: 'easymock', name: 'easymock', version: '2.0'
     
     testRuntime group: 'mysql', name: 'mysql-connector-java', version: '5.1.29'
+    testRuntime group: 'org.slf4j', name: 'slf4j-api', version: '1.7.13'
+
+    javancss group: 'org.codehaus.javancss', name: 'javancss', version: '32.53'
+
+    java2html group: 'de.java2html', name: 'java2html', version: '5.0'
 }
 
 sourceSets {
@@ -40,6 +56,7 @@ sourceSets {
             srcDir 'unit_test_src'
         }
     }
+/*    
     integrationTest {
         java {
             srcDir 'test_src'
@@ -47,6 +64,7 @@ sourceSets {
         compileClasspath += sourceSets.main.output
         runtimeClasspath += sourceSets.main.output
     }
+*/
 }
 
 compileJava {
@@ -56,7 +74,7 @@ compileJava {
 compileTestJava {
     options.encoding = 'ISO8859-1'
 }
-
+/*
 compileIntegrationTestJava {
     options.encoding = 'ISO8859-1'
 }
@@ -64,4 +82,65 @@ compileIntegrationTestJava {
 task integrationTest(type: Test) {
     testClassesDir = sourceSets.integrationTest.output.classesDir
     classpath = sourceSets.integrationTest.runtimeClasspath
+}
+*/
+checkstyleMain {
+    configFile = new File(rootDir, "config/rob_checks.xml")
+}
+
+checkstyleTest {
+    configFile = new File(rootDir, "config/rob_test_checks.xml")
+}
+
+jar {
+    dependsOn check
+}
+
+cobertura {
+    coverageFormats = [ 'html', 'xml' ]
+    coverageIgnoreTrivial = true
+    coverageReportDir = new File("$buildDir/reports/cobertura")
+}
+
+test.finalizedBy(project.tasks.cobertura)
+
+cpdCheck {
+    source = sourceSets.main.java
+    minimumTokenCount = 25
+    ignoreFailures = true
+}
+
+task cpdHtml << {
+    ant.xslt(in: "build/reports/cpd/cpdCheck.xml", style: "config/cpdhtml.xslt", out: "build/reports/cpd/cpd.html")
+}
+
+cpdCheck.finalizedBy(project.tasks.cpdHtml)
+
+task jdependHtml << {
+    ant.xslt(in: "build/reports/jdepend/main.xml", style: "config/jdepend.xsl", out: "build/reports/jdepend/jdepend.html")
+}
+
+jdependMain.finalizedBy(project.tasks.jdependHtml)
+
+task javancss << {
+    mkdir reportsDir
+    new File(reportsDir, "javancss").mkdirs()
+    
+    ant {
+        taskdef name: 'javancss', classname: 'javancss.JavancssAntTask', classpath: configurations.javancss.asPath
+        javancss srcDir: 'src', generateReport: true, outputFile: new File(reportsDir, "javancss/javancss_metrics.xml"), format: 'xml', includes: '**/*.java' 
+        xslt in: new File(reportsDir, "javancss/javancss_metrics.xml"), style: "config/javancss2html.xsl", out: new File(reportsDir, "javancss/javancss.html")
+    }
+}
+
+java2html {
+    conversion {
+        srcDirs = files("src")
+        outputFormat = 'html'
+        tabs = 4
+    }
+}
+
+check {
+    dependsOn javancss
 }
