@@ -9,7 +9,7 @@ apply plugin: 'checkstyle'
 apply plugin: 'jdepend'
 
 wrapper {
-    gradleVersion = '2.11'
+    gradleVersion = '2.12'
 }
 
 repositories {
