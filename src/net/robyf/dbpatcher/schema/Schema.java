@@ -20,11 +20,9 @@
 package net.robyf.dbpatcher.schema;
 
 import java.io.File;
-import java.io.FilenameFilter;
 import java.nio.charset.Charset;
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -70,23 +68,10 @@ public final class Schema {
             throw new SchemaException("Version " + version + " not available");
         }
         
-        File[] scriptsArray = versionDir.getDirectory().listFiles(new FilenameFilter() {
-            
-            @Override
-            public boolean accept(final File dir, final String name) {
-                return name.endsWith(".sql");
-            }
-
-        });
+        File[] scriptsArray = versionDir.getDirectory()
+                .listFiles((dir, name) -> name.endsWith(".sql"));
         List<File> scripts = Arrays.asList(scriptsArray);
-        Collections.sort(scripts, new Comparator<File>() {
-
-            @Override
-            public int compare(final File o1, final File o2) {
-                return o1.getName().compareTo(o2.getName());
-            }
-
-        });
+        Collections.sort(scripts, (file1, file2) -> file1.getName().compareTo(file2.getName()));
 
         List<String> statements = new LinkedList<>();
         for (File script : scripts) {
