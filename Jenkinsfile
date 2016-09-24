@@ -25,7 +25,7 @@ node {
     } finally {
         stage("Publish reports") {
             publishUnitTestResults()
-            publishCheckstyleTestResults()
+            publishCheckstyleResults()
         }
     }
 }
