@@ -20,7 +20,6 @@
 package net.robyf.dbpatcher.schema;
 
 import java.io.File;
-import java.io.FilenameFilter;
 import java.nio.charset.Charset;
 import java.util.Set;
 import java.util.TreeSet;
@@ -53,14 +52,7 @@ public final class SchemaReader {
             needsCleanup = false;
         }
         
-        File[] children = schemaDir.listFiles(new FilenameFilter() {
-            
-            @Override
-            public boolean accept(final File dir, final String name) {
-                return !name.startsWith(".");
-            }
-
-        });
+        File[] children = schemaDir.listFiles((dir, name) -> !name.startsWith("."));
         if (children.length == 0) {
             throw new SchemaException(schemaRoot.getName() + " is empty");
         }
@@ -88,14 +80,7 @@ public final class SchemaReader {
                 versions.add(new VersionDir(Long.valueOf(name), child));
                 foundVersionDirectory = true;
                 
-                File[] versionScripts = child.listFiles(new FilenameFilter() {
-                    
-                    @Override
-                    public boolean accept(final File dir, final String name) {
-                        return name.endsWith(".sql");
-                    }
-
-                });
+                File[] versionScripts = child.listFiles((dir, fName) -> fName.endsWith(".sql"));
                 if (versionScripts.length == 0) {
                     throw new SchemaException("Version " + child.getName()
                                               + " doesn't contain any sql script");
