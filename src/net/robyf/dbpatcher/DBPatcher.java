@@ -24,6 +24,7 @@ package net.robyf.dbpatcher;
  * @since 0.9.0
  * @author Roberto Fasciolo
  */
+@FunctionalInterface
 public interface DBPatcher {
     
     void patch(Parameters parameters) throws DBPatcherException;
