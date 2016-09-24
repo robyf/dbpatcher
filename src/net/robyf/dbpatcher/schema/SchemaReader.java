@@ -65,14 +65,14 @@ public final class SchemaReader {
             throw new SchemaException(schemaRoot.getName() + " is empty");
         }
         
-        Set<VersionDir> versions = new TreeSet<VersionDir>();
+        Set<VersionDir> versions = new TreeSet<>();
         boolean foundVersionDirectory = false;
         for (File child : children) {
             if (child.isDirectory()) {
                 try {
                     String name = child.getName();
-                    if (name.indexOf("-") != -1) {
-                        name = name.substring(0, name.indexOf("-"));
+                    if (name.indexOf('-') != -1) {
+                        name = name.substring(0, name.indexOf('-'));
                     }
                     versions.add(new VersionDir(Long.valueOf(name), child.getName()));
                     foundVersionDirectory = true;
