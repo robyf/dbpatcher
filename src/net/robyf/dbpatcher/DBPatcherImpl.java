@@ -123,13 +123,10 @@ final class DBPatcherImpl implements DBPatcher {
 
     private Connection getConnection(final String databaseName) throws DBPatcherException {
         String url = "jdbc:mysql://localhost/" + databaseName;
-        Connection connection;
         try {
-            connection =
-                    DriverManager.getConnection(url,
-                                                this.parameters.getUsername(),
-                                                this.parameters.getPassword());
-            return connection;
+            return DriverManager.getConnection(url,
+                                               this.parameters.getUsername(),
+                                               this.parameters.getPassword());
         } catch (SQLException sqle) {
             throw new DBPatcherException("Error getting a connection", sqle);
         }
