@@ -13,6 +13,7 @@ node {
     
     stage("Publish reports") {
         publishUnitTestResults()
+        publishCheckstyleTestResults()
     }
 /*    
     stage("Upload archives") {
@@ -29,4 +30,13 @@ node {
 
 def publishUnitTestResults() {
     step([$class: "JUnitResultArchiver", testResults: "build/**/TEST-*.xml"])
+}
+
+def publishCheckstyleResults() {
+    step([$class: "CheckStylePublisher",
+          canComputeNew: false,
+          defaultEncoding: "",
+          healthy: "",
+          pattern: "build/reports/checkstyle/*.xml",
+          unHealthy: ""])
 }
