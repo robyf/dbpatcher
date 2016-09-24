@@ -29,6 +29,12 @@ import java.util.LinkedList;
 import java.util.List;
 
 /**
+ * Parser for SQL scripts.
+ * SQL statements are by default semicolon delimited. The delimiter can be changed by adding a
+ * <code>--DELIMITER</code> directive in the script first line. For example:<br>
+ * <code>--DELIMITER "|"</code><br>
+ * sets <code>|</code> as delimiter.
+ * 
  * @since 0.9.0
  * @author Roberto Fasciolo
  */
@@ -43,15 +49,31 @@ public final class ScriptParser {
     
     private String delimiter = DEFAULT_DELIMITER;
 
+    /**
+     * Constructs a parser instance that parses a file using ISO-8859-1 as charset.
+     * 
+     * @param script the script to be parsed
+     */
     public ScriptParser(final File script) {
         this(script, Charset.forName("ISO-8859-1"));
     }
     
+    /**
+     * Constructs a parser instance that parses a file using a given charset.
+     * 
+     * @param script the script to be parsed
+     * @param charset the charset
+     */
     public ScriptParser(final File script, final Charset charset) {
         this.script = script;
         this.charset = charset;
     }
 
+    /**
+     * Parses the script.
+     * 
+     * @return a list of SQl statements
+     */
     public List<String> parse() {
         StringBuilder builder = new StringBuilder();
         try (BufferedReader reader = new BufferedReader(
