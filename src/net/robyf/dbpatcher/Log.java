@@ -25,6 +25,7 @@ package net.robyf.dbpatcher;
  * @since 0.9.0
  * @author Roberto Fasciolo
  */
+@FunctionalInterface
 public interface Log {
 
     void log(String message);
