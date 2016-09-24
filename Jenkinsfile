@@ -7,25 +7,27 @@ node {
         sh "./gradlew --info clean"
     }
 
-    stage("Build") {
-        sh "./gradlew --info build"
-    }
-    
-    stage("Publish reports") {
-        publishUnitTestResults()
-        publishCheckstyleTestResults()
-    }
+    try {
+        stage("Build") {
+            sh "./gradlew --info build"
+        }
 /*    
-    stage("Upload archives") {
-        sh "./gradlew --info uploadArchives"
-    }
-    
-    if (env.BRANCH_NAME == "master") {
-        stage("Publish plugin") {
-            sh "./gradlew --info bintrayUpload publishPlugins"
+        stage("Upload archives") {
+            sh "./gradlew --info uploadArchives"
+        }
+        
+        if (env.BRANCH_NAME == "master") {
+            stage("Publish plugin") {
+                sh "./gradlew --info bintrayUpload publishPlugins"
+            }
+        }
+*/
+    } finally {
+        stage("Publish reports") {
+            publishUnitTestResults()
+            publishCheckstyleTestResults()
         }
     }
-*/
 }
 
 def publishUnitTestResults() {
