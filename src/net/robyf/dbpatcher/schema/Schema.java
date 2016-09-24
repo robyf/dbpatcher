@@ -90,7 +90,7 @@ public final class Schema {
 
         });
 
-        List<String> statements = new LinkedList<String>();
+        List<String> statements = new LinkedList<>();
         for (File script : scripts) {
             statements.addAll(ScriptParser.parse(script, charset));
         }
@@ -98,7 +98,7 @@ public final class Schema {
     }
 
     public List<Long> getSteps(final Long initialVersion, final Long requiredVersion) {
-        List<Long> steps = new LinkedList<Long>();
+        List<Long> steps = new LinkedList<>();
         
         for (Long version : this.availableVersions.keySet()) {
             if ((initialVersion == null || version.longValue() > initialVersion.longValue())
@@ -115,7 +115,7 @@ public final class Schema {
     }
 
     Long getLatestAvailableVersion() {
-        List<Long> versions = new LinkedList<Long>(this.availableVersions.keySet());
+        List<Long> versions = new LinkedList<>(this.availableVersions.keySet());
         return versions.get(versions.size() - 1);
     }
     
