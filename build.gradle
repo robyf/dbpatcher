@@ -55,12 +55,12 @@ dependencies {
     compile group: 'commons-cli', name: 'commons-cli', version: '1.2'
     compile group: 'org.apache.ant', name: 'ant', version: '1.7.0'
 
-    testCompile group: 'junit', name: 'junit', version: '4.8.2'
-    testCompile group: 'easymock', name: 'easymock', version: '2.0'
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+    testCompile group: 'org.easymock', name: 'easymock', version: '3.4'
     
-    testRuntime group: 'mysql', name: 'mysql-connector-java', version: '5.1.29'
+    testRuntime group: 'mysql', name: 'mysql-connector-java', version: '5.1.39'
 
-    javancss group: 'org.codehaus.javancss', name: 'javancss', version: '32.53'
+    javancss group: 'org.codehaus.javancss', name: 'javancss', version: '33.54'
 
     java2html group: 'de.java2html', name: 'java2html', version: '5.0'
 }
