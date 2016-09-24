@@ -32,6 +32,11 @@ public final class DirUtil {
     private DirUtil() {
     }
 
+    /**
+     * Creates a temporary directory.
+     * 
+     * @return the temporary directory
+     */
     public static File createTempDirectory() {
         try {
             return Files.createTempDirectory("dbpatcher").toFile();
@@ -40,6 +45,11 @@ public final class DirUtil {
         }
     }
 
+    /**
+     * Deletes a file or recursively delete a directory.
+     * 
+     * @param entry the file or directory to be deleted
+     */
     public static void delete(final File entry) {
         if (!entry.exists()) {
             return;
