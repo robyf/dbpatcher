@@ -59,7 +59,6 @@ dependencies {
     testCompile group: 'easymock', name: 'easymock', version: '2.0'
     
     testRuntime group: 'mysql', name: 'mysql-connector-java', version: '5.1.29'
-    testRuntime group: 'org.slf4j', name: 'slf4j-api', version: '1.7.13'
 
     javancss group: 'org.codehaus.javancss', name: 'javancss', version: '32.53'
 
