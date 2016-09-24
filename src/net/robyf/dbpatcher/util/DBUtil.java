@@ -86,7 +86,7 @@ public final class DBUtil {
             stmt = connection.createStatement();
             resultSet = stmt.executeQuery("show tables");
 
-            List<String> results = new LinkedList<String>();
+            List<String> results = new LinkedList<>();
             while (resultSet.next()) {
                 results.add(resultSet.getString(1));
             }
