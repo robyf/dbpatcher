@@ -121,7 +121,7 @@ public final class Schema {
         
         private final File directory;
         
-        public Hook(final File directory) {
+        Hook(final File directory) {
             this.directory = directory;
         }
         
