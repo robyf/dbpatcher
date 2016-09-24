@@ -81,17 +81,7 @@ final class DBPatcherImpl implements DBPatcher {
             this.connection = this.getConnection();
         }
         try {
-            List<Long> steps;
-            if (this.parameters.getTargetVersion() == null) {
-                steps =
-                        this.schema.getStepsToLatest(DBUtil.getDatabaseVersion(this.connection));
-            } else {
-                steps =
-                        this.schema.getSteps(DBUtil.getDatabaseVersion(this.connection),
-                                             this.parameters.getTargetVersion());
-            }
-            LogFactory.getLog().log("Steps to be applied: " + steps.toString());
-            for (Long step : steps) {
+            for (Long step : this.defineSteps()) {
                 this.applyStep(step);
             }
         } catch (DBPatcherException dbpe) {
@@ -111,6 +101,20 @@ final class DBPatcherImpl implements DBPatcher {
                 DirUtil.delete(backupFile);
             }
         }
+    }
+
+    private List<Long> defineSteps() {
+        List<Long> steps;
+        if (this.parameters.getTargetVersion() == null) {
+            steps =
+                    this.schema.getStepsToLatest(DBUtil.getDatabaseVersion(this.connection));
+        } else {
+            steps =
+                    this.schema.getSteps(DBUtil.getDatabaseVersion(this.connection),
+                                         this.parameters.getTargetVersion());
+        }
+        LogFactory.getLog().log("Steps to be applied: " + steps.toString());
+        return steps;
     }
 
     private Connection getConnection() throws DBPatcherException {
