@@ -27,6 +27,7 @@ node {
             sh "./gradlew --info sonarqube"
             publishUnitTestResults()
             publishCheckstyleResults()
+            publishCpdResults()
         }
     }
 }
@@ -42,4 +43,8 @@ def publishCheckstyleResults() {
           healthy: "",
           pattern: "build/reports/checkstyle/*.xml",
           unHealthy: ""])
+}
+
+def publishCpdResults() {
+    step([$class: 'DryPublisher', canComputeNew: false, defaultEncoding: '', healthy: '', pattern: 'build/reports/cpd/*.xml', unHealthy: ''])
 }
