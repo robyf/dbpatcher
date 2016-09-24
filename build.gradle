@@ -48,7 +48,6 @@ configurations {
     integrationTestCompile.extendsFrom testCompile
     integrationTestRuntime.extendsFrom testRuntime
 */
-    javancss
 }
 
 dependencies {
@@ -59,8 +58,6 @@ dependencies {
     testCompile group: 'org.easymock', name: 'easymock', version: '3.4'
     
     testRuntime group: 'mysql', name: 'mysql-connector-java', version: '5.1.39'
-
-    javancss group: 'org.codehaus.javancss', name: 'javancss', version: '33.54'
 
     java2html group: 'de.java2html', name: 'java2html', version: '5.0'
 }
@@ -142,27 +139,12 @@ task jdependHtml << {
 
 jdependMain.finalizedBy(project.tasks.jdependHtml)
 
-task javancss << {
-    mkdir reportsDir
-    new File(reportsDir, "javancss").mkdirs()
-    
-    ant {
-        taskdef name: 'javancss', classname: 'javancss.JavancssAntTask', classpath: configurations.javancss.asPath
-        javancss srcDir: 'src', generateReport: true, outputFile: new File(reportsDir, "javancss/javancss_metrics.xml"), format: 'xml', includes: '**/*.java' 
-        xslt in: new File(reportsDir, "javancss/javancss_metrics.xml"), style: "config/javancss2html.xsl", out: new File(reportsDir, "javancss/javancss.html")
-    }
-}
-
 java2html {
     conversion {
         srcDirs = files("src")
         outputFormat = 'html'
         tabs = 4
     }
-}
-
-check {
-    dependsOn javancss
 }
 
 task sourceJar(type: Jar) {
