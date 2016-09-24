@@ -57,8 +57,8 @@ public final class ScriptParser {
             while (line != null) {
                 if (firstLine) {
                     if (line.trim().startsWith(DELIMITER_CHANGE_START)) {
-                        int start = line.indexOf("\"") + 1;
-                        int end = line.indexOf("\"", start);
+                        int start = line.indexOf('\"') + 1;
+                        int end = line.indexOf('\"', start);
                         delimiter = line.substring(start, end);
                     }
                     firstLine = false;
@@ -73,7 +73,7 @@ public final class ScriptParser {
             throw new ParsingException("Error reading script file", ioe);
         }
 
-        List<String> result = new LinkedList<String>();
+        List<String> result = new LinkedList<>();
         for (String fragment : builder.toString().split(delimiter)) {
             if (!"".equals(fragment.trim())) {
                 result.add(fragment.trim());
