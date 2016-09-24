@@ -13,6 +13,9 @@ apply plugin: 'org.sonarqube'
 group = 'net.robyf'
 archivesBaseName = 'dbpatcher'
 
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
 ext.majorVersion = 1
 ext.minorVersion = 0
 
