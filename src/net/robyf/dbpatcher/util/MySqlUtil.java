@@ -56,6 +56,7 @@ public final class MySqlUtil {
         } catch (IOException ioe) {
             throw new UtilException("Error creating a database", ioe);
         } catch (InterruptedException ie) {
+            Thread.currentThread().interrupt();
             throw new UtilException("Error creating a database", ie);
         }
     }
@@ -76,6 +77,7 @@ public final class MySqlUtil {
         } catch (IOException ioe) {
             throw new UtilException("Error dropping a database", ioe);
         } catch (InterruptedException ie) {
+            Thread.currentThread().interrupt();
             throw new UtilException("Error dropping a database", ie);
         }
     }
@@ -109,6 +111,7 @@ public final class MySqlUtil {
         } catch (IOException ioe) {
             throw new UtilException("Error backing up a database", ioe);
         } catch (InterruptedException ie) {
+            Thread.currentThread().interrupt();
             throw new UtilException("Error backing up a database", ie);
         }
     }
@@ -142,6 +145,7 @@ public final class MySqlUtil {
         } catch (IOException ioe) {
             throw new UtilException("Error restoring a database", ioe);
         } catch (InterruptedException ie) {
+            Thread.currentThread().interrupt();
             throw new UtilException("Error restoring a database", ie);
         }
     }
