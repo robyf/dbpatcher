@@ -15,7 +15,7 @@ public final class DirUtilTest {
     @After
     public void tearDown() {
         if (this.dir != null) {
-            DirUtil.deleteDirectory(this.dir);
+            DirUtil.delete(this.dir);
         }
     }
 
@@ -27,10 +27,10 @@ public final class DirUtilTest {
     }
     
     @Test
-    public void testDeleteDirectory() {
+    public void testDelete() {
         this.dir = DirUtil.createTempDirectory();
         ZipUtil.extract(new File("config/test/simple02.zip"), this.dir);
-        DirUtil.deleteDirectory(this.dir);
+        DirUtil.delete(this.dir);
         assertFalse(this.dir.exists());
     }
 

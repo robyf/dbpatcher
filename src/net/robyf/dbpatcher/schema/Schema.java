@@ -129,7 +129,7 @@ public final class Schema {
         
         @Override
         public void run() {
-            DirUtil.deleteDirectory(this.directory);
+            DirUtil.delete(this.directory);
         }
         
     }

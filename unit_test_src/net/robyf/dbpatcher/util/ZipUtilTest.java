@@ -14,7 +14,7 @@ public final class ZipUtilTest {
 
     @After
     public void tearDown() {
-        DirUtil.deleteDirectory(this.tempDir);
+        DirUtil.delete(this.tempDir);
     }
 
     @Test

@@ -30,6 +30,7 @@ import java.util.List;
 import net.robyf.dbpatcher.schema.Schema;
 import net.robyf.dbpatcher.schema.SchemaReader;
 import net.robyf.dbpatcher.util.DBUtil;
+import net.robyf.dbpatcher.util.DirUtil;
 import net.robyf.dbpatcher.util.MySqlUtil;
 
 /**
@@ -107,10 +108,7 @@ final class DBPatcherImpl implements DBPatcher {
                                        this.parameters.getPassword());
             }
             if (backupFile != null) {
-                if (!backupFile.delete()) {
-                    LogFactory.getLog()
-                            .log("Error deleting backup file: " + backupFile.getAbsolutePath());
-                }
+                DirUtil.delete(backupFile);
             }
         }
     }
@@ -159,10 +157,7 @@ final class DBPatcherImpl implements DBPatcher {
         } finally {
             DBUtil.closeStatement(statement);
             if (backupFile != null) {
-                if (!backupFile.delete()) {
-                    LogFactory.getLog()
-                            .log("Error deleting backup file: " + backupFile.getAbsolutePath());
-                }
+                DirUtil.delete(backupFile);
             }
         }
     }

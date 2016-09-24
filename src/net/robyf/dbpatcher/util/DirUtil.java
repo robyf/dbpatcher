@@ -40,20 +40,20 @@ public final class DirUtil {
         }
     }
 
-    public static void deleteDirectory(final File dir) {
-        if (!dir.exists()) {
+    public static void delete(final File entry) {
+        if (!entry.exists()) {
             return;
         }
-
-        for (File file : dir.listFiles()) {
-            if (file.isDirectory()) {
-                DirUtil.deleteDirectory(file);
-            } else {
-                file.delete();
+        
+        if (entry.isDirectory()) {
+            for (File file: entry.listFiles()) {
+                DirUtil.delete(file);
             }
         }
-
-        dir.delete();
+        
+        if (!entry.delete()) {
+            throw new UtilException("Error deleting: " + entry.getAbsolutePath());
+        }
     }
 
 }
