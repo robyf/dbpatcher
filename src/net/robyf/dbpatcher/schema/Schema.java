@@ -27,8 +27,9 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
-import java.util.TreeSet;
+import java.util.TreeMap;
 
 import net.robyf.dbpatcher.parser.ScriptParser;
 import net.robyf.dbpatcher.util.DirUtil;
@@ -40,8 +41,7 @@ import net.robyf.dbpatcher.util.DirUtil;
 public final class Schema {
     
     private final File schemaRootDirectory;
-    private final Set<VersionDir> availableVersionDirs;
-    private final Set<Long> availableVersions;
+    private final Map<Long, VersionDir> availableVersions;
     private final Charset charset;
     
     public Schema(final File schemaRoorDirectory,
@@ -49,10 +49,9 @@ public final class Schema {
                   final boolean cleanupOnShutdown,
                   final Charset charset) {
         this.schemaRootDirectory = schemaRoorDirectory;
-        this.availableVersionDirs = availableVersions;
-        this.availableVersions = new TreeSet<Long>();
+        this.availableVersions = new TreeMap<>();
         for (VersionDir versionDir : availableVersions) {
-            this.availableVersions.add(versionDir.getVersion());
+            this.availableVersions.put(versionDir.getVersion(), versionDir);
         }
         this.charset = charset;
         if (cleanupOnShutdown) {
@@ -61,20 +60,14 @@ public final class Schema {
     }
     
     public Set<Long> getAvailableVersions() {
-        return Collections.unmodifiableSet(this.availableVersions);
+        return Collections.unmodifiableSet(this.availableVersions.keySet());
     }
     
     public List<String> getStatementsForVersion(final Long version) {
-        if (!this.availableVersions.contains(version)) {
+        VersionDir versionDir = this.availableVersions.get(version);
+
+        if (versionDir == null) {
             throw new SchemaException("Version " + version + " not available");
-        }
-        
-        VersionDir versionDir = null;
-        for (VersionDir dir : this.availableVersionDirs) {
-            if (dir.getVersion().equals(version)) {
-                versionDir = dir;
-                break;
-            }
         }
         
         File[] scriptsArray =
@@ -107,7 +100,7 @@ public final class Schema {
     public List<Long> getSteps(final Long initialVersion, final Long requiredVersion) {
         List<Long> steps = new LinkedList<Long>();
         
-        for (Long version : this.availableVersions) {
+        for (Long version : this.availableVersions.keySet()) {
             if ((initialVersion == null || version.longValue() > initialVersion.longValue())
                 && version.longValue() <= requiredVersion.longValue()) {
                 steps.add(version);
@@ -122,7 +115,7 @@ public final class Schema {
     }
 
     Long getLatestAvailableVersion() {
-        List<Long> versions = new LinkedList<Long>(this.availableVersions);
+        List<Long> versions = new LinkedList<Long>(this.availableVersions.keySet());
         return versions.get(versions.size() - 1);
     }
     
