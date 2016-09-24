@@ -8,6 +8,28 @@ apply plugin: 'java'
 apply plugin: 'checkstyle'
 apply plugin: 'jdepend'
 
+group = 'net.robyf'
+archivesBaseName = 'dbpatcher'
+
+ext.majorVersion = 1
+ext.minorVersion = 0
+
+def computeVersionNumber() {
+    def computedVersion
+    ext.env = System.getenv()
+    ext.branchName = env.BRANCH_NAME
+    if (ext.branchName == "master") {
+        ext.buildNumber = env.BUILD_NUMBER?.toInteger()
+        computedVersion = "${majorVersion}.${minorVersion}.${buildNumber}"
+    } else {
+        computedVersion = "${majorVersion}.${minorVersion}-SNAPSHOT"
+    }
+    return computedVersion
+}
+
+version = computeVersionNumber()
+ext.isSnapshot = version.endsWith("SNAPSHOT")
+
 wrapper {
     gradleVersion = '3.1'
 }
