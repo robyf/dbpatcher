@@ -11,6 +11,7 @@ apply plugin: 'jacoco'
 apply plugin: 'org.sonarqube'
 
 group = 'net.robyf'
+name = 'dbpatcher'
 archivesBaseName = 'dbpatcher'
 
 ext.majorVersion = 1
