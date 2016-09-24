@@ -107,7 +107,10 @@ final class DBPatcherImpl implements DBPatcher {
                                        this.parameters.getPassword());
             }
             if (backupFile != null) {
-                backupFile.delete();
+                if (!backupFile.delete()) {
+                    LogFactory.getLog()
+                            .log("Error deleting backup file: " + backupFile.getAbsolutePath());
+                }
             }
         }
     }
@@ -156,7 +159,10 @@ final class DBPatcherImpl implements DBPatcher {
         } finally {
             DBUtil.closeStatement(statement);
             if (backupFile != null) {
-                backupFile.delete();
+                if (!backupFile.delete()) {
+                    LogFactory.getLog()
+                            .log("Error deleting backup file: " + backupFile.getAbsolutePath());
+                }
             }
         }
     }
