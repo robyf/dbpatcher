@@ -29,6 +29,10 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import org.apache.commons.exec.CommandLine;
+import org.apache.commons.exec.DefaultExecutor;
+import org.apache.commons.exec.ExecuteWatchdog;
+
 import net.robyf.dbpatcher.LogFactory;
 
 /**
@@ -43,42 +47,33 @@ public final class MySqlUtil {
     public static void createDatabase(final String databaseName,
                                       final String username,
                                       final String password) {
-        try {
-            Process process =
-                    Runtime.getRuntime().exec("mysqladmin -u " + username
-                                              + " --password=" + password
-                                              + " create " + databaseName);
-            process.waitFor();
-            if (process.exitValue() != 0) {
-                throw new UtilException("Error creating database, return code from mysqladmin = "
-                                        + process.exitValue());
-            }
-        } catch (IOException ioe) {
-            throw new UtilException("Error creating a database", ioe);
-        } catch (InterruptedException ie) {
-            Thread.currentThread().interrupt();
-            throw new UtilException("Error creating a database", ie);
+        CommandLine command = new CommandLine("mysqladmin");
+        command.addArgument("-u").addArgument(username);
+        command.addArgument("--password=" + password);
+        command.addArgument("create");
+        command.addArgument(databaseName);
+
+        int code = execute(command);
+        if (code != 0) {
+            throw new UtilException("Error creating database, return code from mysqladmin = "
+                    + code);
         }
     }
 
     public static void dropDatabase(final String databaseName,
                                     final String username,
                                     final String password) {
-        try {
-            Process process =
-                    Runtime.getRuntime().exec("mysqladmin -u " + username
-                                              + " --password=" + password
-                                              + " -f drop " + databaseName);
-            process.waitFor();
-            if (process.exitValue() != 0) {
-                throw new UtilException("Error dropping database, return code from mysqladmin = "
-                                        + process.exitValue());
-            }
-        } catch (IOException ioe) {
-            throw new UtilException("Error dropping a database", ioe);
-        } catch (InterruptedException ie) {
-            Thread.currentThread().interrupt();
-            throw new UtilException("Error dropping a database", ie);
+        CommandLine command = new CommandLine("mysqladmin");
+        command.addArgument("-u").addArgument(username);
+        command.addArgument("--password=" + password);
+        command.addArgument("drop");
+        command.addArgument("-f");
+        command.addArgument(databaseName);
+
+        int code = execute(command);
+        if (code != 0) {
+            throw new UtilException("Error dropping database, return code from mysqladmin = "
+                    + code);
         }
     }
 
@@ -161,6 +156,16 @@ public final class MySqlUtil {
             throw new UtilException("Error creating the database version table", sqle);
         } finally {
             DBUtil.closeStatement(stmt);
+        }
+    }
+
+    private static int execute(final CommandLine commandLine) {
+        try {
+            DefaultExecutor executor = new DefaultExecutor();
+            executor.setWatchdog(new ExecuteWatchdog(300000L));
+            return executor.execute(commandLine);
+        } catch (IOException ioe) {
+            throw new UtilException("Error executing: " + commandLine, ioe);
         }
     }
 
