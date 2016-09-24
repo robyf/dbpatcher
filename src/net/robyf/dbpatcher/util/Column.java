@@ -37,7 +37,7 @@ public final class Column {
         this.name = metadata.getColumnName(index);
         this.type = metadata.getColumnTypeName(index);
         this.size = metadata.getColumnDisplaySize(index);
-        this.nullable = (metadata.isNullable(index) == 1);
+        this.nullable = (metadata.isNullable(index) == 1); //NOSONAR
     }
 
     public Column(final String name, final String type, final int size, final boolean nullable) {
