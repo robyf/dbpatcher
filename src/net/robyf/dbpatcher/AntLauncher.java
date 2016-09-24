@@ -74,18 +74,10 @@ public final class AntLauncher extends Task {
 
     @Override
     public void execute() {
-        if (this.username == null) {
-            throw new BuildException("Username hasn't been specified");
-        }
-        if (this.password == null) {
-            throw new BuildException("Password hasn't been specified");
-        }
-        if (this.database == null) {
-            throw new BuildException("Database name hasn't been specified");
-        }
-        if (this.schemaRoot == null) {
-            throw new BuildException("Schema root directory hasn't been specified");
-        }
+        validateUsername();
+        validatePassword();
+        validateDatabase();
+        validateSchemaRoot();
 
         Parameters parameters = new Parameters();
         parameters.setUsername(this.username);
@@ -103,6 +95,30 @@ public final class AntLauncher extends Task {
             DBPatcherFactory.getDBPatcher().patch(parameters);
         } catch (Exception e) {
             throw new BuildException("Error patching database", e);
+        }
+    }
+
+    private void validateSchemaRoot() {
+        if (this.schemaRoot == null) {
+            throw new BuildException("Schema root directory hasn't been specified");
+        }
+    }
+
+    private void validateDatabase() {
+        if (this.database == null) {
+            throw new BuildException("Database name hasn't been specified");
+        }
+    }
+
+    private void validatePassword() {
+        if (this.password == null) {
+            throw new BuildException("Password hasn't been specified");
+        }
+    }
+
+    private void validateUsername() {
+        if (this.username == null) {
+            throw new BuildException("Username hasn't been specified");
         }
     }
 
