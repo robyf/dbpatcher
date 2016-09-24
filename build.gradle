@@ -165,3 +165,20 @@ java2html {
 check {
     dependsOn javancss
 }
+
+task sourceJar(type: Jar) {
+    description = "An archive of the source code for Maven Central"
+    classifier = 'sources'
+    from sourceSets.main.allSource
+    from "config/COPYING.txt"
+}
+
+task javadocJar(type: Jar) {
+    description = "An archive of the GroovyDocs for Maven Central"
+    classifier = 'javadoc'
+    from javadoc
+}
+
+artifacts {
+    archives jar, javadocJar, sourceJar
+}
