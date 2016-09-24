@@ -1,12 +1,12 @@
 plugins {
     id 'de.aaschmid.cpd' version '1.0'
     id "com.bmuschko.java2html" version "2.0"
-    id "net.saliman.cobertura" version "2.3.2"
 }
 
 apply plugin: 'java'
 apply plugin: 'checkstyle'
 apply plugin: 'jdepend'
+apply plugin: 'jacoco'
 
 group = 'net.robyf'
 archivesBaseName = 'dbpatcher'
@@ -118,13 +118,7 @@ jar {
     dependsOn check
 }
 
-cobertura {
-    coverageFormats = [ 'html', 'xml' ]
-    coverageIgnoreTrivial = true
-    coverageReportDir = new File("$buildDir/reports/cobertura")
-}
-
-test.finalizedBy(project.tasks.cobertura)
+test.finalizedBy(project.tasks.jacocoTestReport)
 
 cpdCheck {
     source = sourceSets.main.java
