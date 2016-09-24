@@ -72,7 +72,7 @@ final class DBPatcherImpl implements DBPatcher {
                                      this.parameters.getUsername(),
                                      this.parameters.getPassword());
             MySqlUtil.restore(tempDatabase,
-                              backupFile.getAbsolutePath(),
+                              backupFile.getAbsolutePath(), //NOSONAR
                               this.parameters.getUsername(),
                               this.parameters.getPassword());
             this.connection = this.getConnection(tempDatabase);
