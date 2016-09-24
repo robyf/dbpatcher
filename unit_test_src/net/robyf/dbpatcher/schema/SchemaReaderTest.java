@@ -22,42 +22,42 @@ public final class SchemaReaderTest {
 
     @Test (expected = SchemaException.class)
     public void testRead_unexistant_directory() {
-        SchemaReader.read(new File("kalakukko"), CHARSET);
+        new SchemaReader().read(new File("kalakukko"), CHARSET);
     }
 
     @Test (expected = UtilException.class)
     public void testRead_not_a_zip_file() {
-        SchemaReader.read(new File("config/checkstyle.xsl"), CHARSET);
+        new SchemaReader().read(new File("config/checkstyle.xsl"), CHARSET);
     }
 
     @Test (expected = SchemaException.class)
     public void testRead_empty_directory() {
-        SchemaReader.read(new File("config/test/empty"), CHARSET);
+        new SchemaReader().read(new File("config/test/empty"), CHARSET);
     }
 
     @Test (expected = SchemaException.class)
     public void testRead_missing_version_directories() {
-        SchemaReader.read(new File("config/test/test01/1"), CHARSET);
+        new SchemaReader().read(new File("config/test/test01/1"), CHARSET);
     }
 
     @Test (expected = SchemaException.class)
     public void testRead_missing_versions() {
-        SchemaReader.read(new File("config/test"), CHARSET);
+        new SchemaReader().read(new File("config/test"), CHARSET);
     }
 
     @Test (expected = SchemaException.class)
     public void testRead_empty_version_inside_schema() {
-        SchemaReader.read(new File("config/test/test02"), CHARSET);
+        new SchemaReader().read(new File("config/test/test02"), CHARSET);
     }
 
     @Test (expected = SchemaException.class)
     public void testRead_version_without_scripts_inside_schema() {
-        SchemaReader.read(new File("config/test/test03"), CHARSET);
+        new SchemaReader().read(new File("config/test/test03"), CHARSET);
     }
 
     @Test
     public void testRead() {
-        Schema schema = SchemaReader.read(new File("config/test/test01"), CHARSET);
+        Schema schema = new SchemaReader().read(new File("config/test/test01"), CHARSET);
         assertNotNull(schema);
         Set<Long> versions = schema.getAvailableVersions();
         assertEquals(2, versions.size());
@@ -75,7 +75,7 @@ public final class SchemaReaderTest {
 
     @Test
     public void testRead_with_trailing_zeros() {
-        Schema schema = SchemaReader.read(new File("config/test/test04"), CHARSET);
+        Schema schema = new SchemaReader().read(new File("config/test/test04"), CHARSET);
         assertNotNull(schema);
         Set<Long> versions = schema.getAvailableVersions();
         assertEquals(2, versions.size());
@@ -93,7 +93,7 @@ public final class SchemaReaderTest {
 
     @Test
     public void testRead_with_descriptive_names() {
-        Schema schema = SchemaReader.read(new File("config/test/test05"), CHARSET);
+        Schema schema = new SchemaReader().read(new File("config/test/test05"), CHARSET);
         assertNotNull(schema);
         Set<Long> versions = schema.getAvailableVersions();
         assertEquals(2, versions.size());

@@ -56,8 +56,8 @@ final class DBPatcherImpl implements DBPatcher {
         this.parameters = parameters;
         LogFactory.getLog().log("Using database: " + this.parameters.getDatabaseName());
         this.schema =
-                SchemaReader.read(new File(parameters.getSchemaPath()),
-                                  this.parameters.getCharset());
+                new SchemaReader().read(new File(parameters.getSchemaPath()),
+                                        this.parameters.getCharset());
 
         File backupFile = null;
         if (this.parameters.rollbackIfError() || this.parameters.isSimulationMode()) {

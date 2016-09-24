@@ -16,7 +16,7 @@ import org.junit.Test;
 public final class SchemaTest {
 
     private final Schema schema =
-            SchemaReader.read(new File("config/test/test01"), Charset.forName("ISO-8859-1"));
+            new SchemaReader().read(new File("config/test/test01"), Charset.forName("ISO-8859-1"));
 
     @Test (expected = SchemaException.class)
     public void testGetStatementsForVersion_unexistant_version() {

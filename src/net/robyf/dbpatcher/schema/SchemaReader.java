@@ -34,11 +34,11 @@ import net.robyf.dbpatcher.util.ZipUtil;
  * @author Roberto Fasciolo
  */
 public final class SchemaReader {
-
-    private SchemaReader() {
-    }
     
-    public static Schema read(final File schemaRoot, final Charset charset) {
+    private Set<VersionDir> versions = new TreeSet<>();
+    private boolean foundVersionDirectory = false;
+    
+    public Schema read(final File schemaRoot, final Charset charset) {
         if (!schemaRoot.exists()) {
             throw new SchemaException("Unexistant schema directory: " + schemaRoot.getName());
         }
@@ -65,34 +65,8 @@ public final class SchemaReader {
             throw new SchemaException(schemaRoot.getName() + " is empty");
         }
         
-        Set<VersionDir> versions = new TreeSet<>();
-        boolean foundVersionDirectory = false;
         for (File child : children) {
-            if (child.isDirectory()) {
-                try {
-                    String name = child.getName();
-                    if (name.indexOf('-') != -1) {
-                        name = name.substring(0, name.indexOf('-'));
-                    }
-                    versions.add(new VersionDir(Long.valueOf(name), child));
-                    foundVersionDirectory = true;
-                    
-                    File[] versionScripts = child.listFiles(new FilenameFilter() {
-                        
-                        @Override
-                        public boolean accept(final File dir, final String name) {
-                            return name.endsWith(".sql");
-                        }
-
-                    });
-                    if (versionScripts.length == 0) {
-                        throw new SchemaException("Version " + child.getName()
-                                                  + " doesn't contain any sql script");
-                    }
-                } catch (NumberFormatException nfe) {
-                    throw new SchemaException("Invalid version: " + child.getName());
-                }
-            }
+            handleChild(child);
         }
         if (!foundVersionDirectory) {
             throw new SchemaException(schemaRoot.getName()
@@ -102,6 +76,34 @@ public final class SchemaReader {
         LogFactory.getLog().log("Found versions: " + versions.toString());
         
         return new Schema(schemaDir, versions, needsCleanup, charset);
+    }
+
+    private void handleChild(final File child) {
+        if (child.isDirectory()) {
+            try {
+                String name = child.getName();
+                if (name.indexOf('-') != -1) {
+                    name = name.substring(0, name.indexOf('-'));
+                }
+                versions.add(new VersionDir(Long.valueOf(name), child));
+                foundVersionDirectory = true;
+                
+                File[] versionScripts = child.listFiles(new FilenameFilter() {
+                    
+                    @Override
+                    public boolean accept(final File dir, final String name) {
+                        return name.endsWith(".sql");
+                    }
+
+                });
+                if (versionScripts.length == 0) {
+                    throw new SchemaException("Version " + child.getName()
+                                              + " doesn't contain any sql script");
+                }
+            } catch (NumberFormatException nfe) {
+                throw new SchemaException("Invalid version: " + child.getName());
+            }
+        }
     }
 
 }
