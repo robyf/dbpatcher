@@ -19,6 +19,8 @@
  */
 package net.robyf.dbpatcher.schema;
 
+import java.io.File;
+
 /**
  * A directory containg a database version.
  * 
@@ -28,26 +30,31 @@ package net.robyf.dbpatcher.schema;
 final class VersionDir implements Comparable<VersionDir> {
 
     private final Long version;
-    private final String dirName;
+    private final File directory;
 
-    public VersionDir(final Long version, final String dirName) {
+    VersionDir(final Long version, final File directory) {
         this.version = version;
-        this.dirName = dirName;
+        this.directory = directory;
     }
 
     public Long getVersion() {
         return version;
     }
 
-    public String getDirName() {
-        return dirName;
+    public File getDirectory() {
+        return directory;
+    }
+
+    @Override
+    public int compareTo(final VersionDir o) {
+        return this.getVersion().compareTo(o.getVersion());
     }
 
     @Override
     public int hashCode() {
         final int prime = 31;
         int result = 1;
-        result = prime * result + ((dirName == null) ? 0 : dirName.hashCode());
+        result = prime * result + ((directory == null) ? 0 : directory.hashCode());
         result = prime * result + ((version == null) ? 0 : version.hashCode());
         return result;
     }
@@ -60,15 +67,15 @@ final class VersionDir implements Comparable<VersionDir> {
         if (obj == null) {
             return false;
         }
-        if (!(obj instanceof VersionDir)) {
+        if (getClass() != obj.getClass()) {
             return false;
         }
         VersionDir other = (VersionDir) obj;
-        if (dirName == null) {
-            if (other.dirName != null) {
+        if (directory == null) {
+            if (other.directory != null) {
                 return false;
             }
-        } else if (!dirName.equals(other.dirName)) {
+        } else if (!directory.equals(other.directory)) {
             return false;
         }
         if (version == null) {
@@ -82,19 +89,8 @@ final class VersionDir implements Comparable<VersionDir> {
     }
 
     @Override
-    public int compareTo(final VersionDir o) {
-        return this.getVersion().compareTo(o.getVersion());
-    }
-
-    @Override
     public String toString() {
-        StringBuilder builder = new StringBuilder();
-        builder.append("VersionDir [version=");
-        builder.append(version);
-        builder.append(", dirName=");
-        builder.append(dirName);
-        builder.append("]");
-        return builder.toString();
+        return String.format("VersionDir [version=%s, directory=%s]", version, directory);
     }
 
 }

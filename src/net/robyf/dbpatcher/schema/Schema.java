@@ -70,9 +70,7 @@ public final class Schema {
             throw new SchemaException("Version " + version + " not available");
         }
         
-        File[] scriptsArray =
-                new File(this.schemaRootDirectory, 
-                         versionDir.getDirName()).listFiles(new FilenameFilter() {
+        File[] scriptsArray = versionDir.getDirectory().listFiles(new FilenameFilter() {
             
             @Override
             public boolean accept(final File dir, final String name) {

@@ -74,7 +74,7 @@ public final class SchemaReader {
                     if (name.indexOf('-') != -1) {
                         name = name.substring(0, name.indexOf('-'));
                     }
-                    versions.add(new VersionDir(Long.valueOf(name), child.getName()));
+                    versions.add(new VersionDir(Long.valueOf(name), child));
                     foundVersionDirectory = true;
                     
                     File[] versionScripts = child.listFiles(new FilenameFilter() {
@@ -90,6 +90,7 @@ public final class SchemaReader {
                                                   + " doesn't contain any sql script");
                     }
                 } catch (NumberFormatException nfe) {
+                    throw new SchemaException("Invalid version: " + child.getName());
                 }
             }
         }
