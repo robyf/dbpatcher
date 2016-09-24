@@ -64,7 +64,6 @@
     <module name="MissingSwitchDefault">
       <property name="severity" value="error"/>
     </module>
-    <module name="RedundantThrows"/>
     <module name="SimplifyBooleanExpression"/>
     <module name="SimplifyBooleanReturn"/>
     <module name="DesignForExtension"/>
