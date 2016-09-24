@@ -24,6 +24,7 @@ node {
 */
     } finally {
         stage("Publish reports") {
+            sh "./gradlew --info sonarqube"
             publishUnitTestResults()
             publishCheckstyleResults()
         }
