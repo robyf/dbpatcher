@@ -17,9 +17,9 @@ public final class ScriptParserTest {
         expected.add("create table TEST (     ID      integer,     NAME    varchar(254) )");
         expected.add("alter table TEST add column KALA varchar(30) not null");
 
-        assertEquals(expected, ScriptParser.parse(new File(this.getClass()
-                                                               .getResource("testscript.sql")
-                                                               .getPath())));
+        assertEquals(expected,
+                new ScriptParser(new File(this.getClass().getResource("testscript.sql").getPath()))
+                        .parse());
     }
 
     @Test
@@ -27,14 +27,14 @@ public final class ScriptParserTest {
         List<String> expected = new ArrayList<String>();
         expected.add("alter table TEST add column KALA varchar(30) not null");
 
-        assertEquals(expected, ScriptParser.parse(new File(this.getClass()
-                                                               .getResource("testscript2.sql")
-                                                               .getPath())));
+        assertEquals(expected,
+                new ScriptParser(new File(this.getClass().getResource("testscript2.sql").getPath()))
+                        .parse());
     }
 
-    @Test (expected = ParsingException.class)
+    @Test(expected = ParsingException.class)
     public void testParsing_unexisting_file() {
-        ScriptParser.parse(new File("kala.sql"));
+        new ScriptParser(new File("kala.sql")).parse();
     }
 
     @Test
@@ -43,9 +43,9 @@ public final class ScriptParserTest {
         expected.add("test latin1 צהו");
 
         assertEquals(expected,
-                     ScriptParser.parse(new File(this.getClass()
-                                                     .getResource("testscript_latin1.sql")
-                                                     .getPath()), Charset.forName("ISO-8859-1")));
+                new ScriptParser(
+                        new File(this.getClass().getResource("testscript_latin1.sql").getPath()),
+                        Charset.forName("ISO-8859-1")).parse());
     }
 
     @Test
@@ -54,9 +54,9 @@ public final class ScriptParserTest {
         expected.add("test utf8 צהו");
 
         assertEquals(expected,
-                     ScriptParser.parse(new File(this.getClass()
-                                                     .getResource("testscript_utf8.sql")
-                                                     .getPath()), Charset.forName("UTF-8")));
+                new ScriptParser(
+                        new File(this.getClass().getResource("testscript_utf8.sql").getPath()),
+                        Charset.forName("UTF-8")).parse());
     }
 
 }

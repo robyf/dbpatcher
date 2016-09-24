@@ -37,30 +37,30 @@ public final class ScriptParser {
     private static final String DEFAULT_DELIMITER = ";";
     private static final String COMMENT_START = "--";
     private static final String DELIMITER_CHANGE_START = "--DELIMITER";
+    
+    private final File script;
+    private final Charset charset;
+    
+    private String delimiter = DEFAULT_DELIMITER;
 
-    private ScriptParser() {
+    public ScriptParser(final File script) {
+        this(script, Charset.forName("ISO-8859-1"));
     }
     
-    public static List<String> parse(final File script) {
-        return ScriptParser.parse(script, Charset.forName("ISO-8859-1"));
+    public ScriptParser(final File script, final Charset charset) {
+        this.script = script;
+        this.charset = charset;
     }
 
-    public static List<String> parse(final File script, final Charset charset) {
-        String delimiter = DEFAULT_DELIMITER;
+    public List<String> parse() {
         StringBuilder builder = new StringBuilder();
-        try {
-            BufferedReader reader =
-                    new BufferedReader(new InputStreamReader(new FileInputStream(script),
-                                                             charset));
+        try (BufferedReader reader = new BufferedReader(
+                new InputStreamReader(new FileInputStream(script), charset))) {
             boolean firstLine = true;
             String line = reader.readLine();
             while (line != null) {
                 if (firstLine) {
-                    if (line.trim().startsWith(DELIMITER_CHANGE_START)) {
-                        int start = line.indexOf('\"') + 1;
-                        int end = line.indexOf('\"', start);
-                        delimiter = line.substring(start, end);
-                    }
+                    handleDelimiterDirective(line);
                     firstLine = false;
                 }
                 if (!"".equals(line.trim()) && !line.trim().startsWith(COMMENT_START)) {
@@ -68,7 +68,6 @@ public final class ScriptParser {
                 }
                 line = reader.readLine();
             }
-            reader.close();
         } catch (IOException ioe) {
             throw new ParsingException("Error reading script file", ioe);
         }
@@ -81,6 +80,14 @@ public final class ScriptParser {
         }
         
         return result;
+    }
+
+    private void handleDelimiterDirective(final String line) {
+        if (line.trim().startsWith(DELIMITER_CHANGE_START)) {
+            int start = line.indexOf('\"') + 1;
+            int end = line.indexOf('\"', start);
+            delimiter = line.substring(start, end);
+        }
     }
 
 }

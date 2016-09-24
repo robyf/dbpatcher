@@ -90,7 +90,7 @@ public final class Schema {
 
         List<String> statements = new LinkedList<>();
         for (File script : scripts) {
-            statements.addAll(ScriptParser.parse(script, charset));
+            statements.addAll(new ScriptParser(script, charset).parse());
         }
         return statements;
     }
