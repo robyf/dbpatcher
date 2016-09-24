@@ -53,7 +53,7 @@ sourceSets {
             srcDirs 'unit_test_src', 'test_src'
         }
         resources {
-            srcDir 'unit_test_src'
+            srcDirs 'unit_test_src', 'config'
         }
     }
 /*    
