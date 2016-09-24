@@ -1,12 +1,14 @@
 plugins {
     id 'de.aaschmid.cpd' version '1.0'
     id "com.bmuschko.java2html" version "2.0"
+    id "org.sonarqube" version "2.1-rc3"
 }
 
 apply plugin: 'java'
 apply plugin: 'checkstyle'
 apply plugin: 'jdepend'
 apply plugin: 'jacoco'
+apply plugin: 'org.sonarqube'
 
 group = 'net.robyf'
 archivesBaseName = 'dbpatcher'
