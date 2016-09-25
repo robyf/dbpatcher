@@ -11,11 +11,11 @@ node {
         stage("Build") {
             sh "./gradlew --info build"
         }
-/*    
+
         stage("Upload archives") {
             sh "./gradlew --info uploadArchives"
         }
-        
+/*        
         if (env.BRANCH_NAME == "master") {
             stage("Publish plugin") {
                 sh "./gradlew --info bintrayUpload publishPlugins"
