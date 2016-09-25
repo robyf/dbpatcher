@@ -131,11 +131,11 @@ public final class MySqlUtil {
             executor.setWatchdog(new ExecuteWatchdog(300000L));
             int returnCode = executor.execute(commandLine);
             if (returnCode != 0) {
-                throw new UtilException(
-                        "Error executing " + commandLine + ", return code = " + returnCode);
+                throw new UtilException("Error executing: " + commandLine
+                                        + ", return code = " + returnCode); //NOSONAR
             }
         } catch (IOException ioe) {
-            throw new UtilException("Error executing: " + commandLine, ioe);
+            throw new UtilException("Error executing: " + commandLine, ioe); //NOSONAR
         }
     }
 
@@ -149,12 +149,12 @@ public final class MySqlUtil {
             executor.setStreamHandler(handler);
             int returnCode = executor.execute(commandLine);
             if (returnCode != 0) {
-                throw new UtilException(
-                        "Error executing " + commandLine + ", return code = " + returnCode);
+                throw new UtilException("Error executing: " + commandLine
+                                        + ", return code = " + returnCode); //NOSONAR
             }
             return new ByteArrayInputStream(outStream.toByteArray());
         } catch (IOException ioe) {
-            throw new UtilException("Error executing: " + commandLine, ioe);
+            throw new UtilException("Error executing: " + commandLine, ioe); //NOSONAR
         }
     }
 
@@ -167,11 +167,11 @@ public final class MySqlUtil {
             executor.setWatchdog(new ExecuteWatchdog(300000L));
             int returnCode = executor.execute(commandLine);
             if (returnCode != 0) {
-                throw new UtilException(
-                        "Error executing " + commandLine + ", return code = " + returnCode);
+                throw new UtilException("Error executing: " + commandLine
+                                        + ", return code = " + returnCode); //NOSONAR
             }
         } catch (IOException ioe) {
-            throw new UtilException("Error executing: " + commandLine, ioe);
+            throw new UtilException("Error executing: " + commandLine, ioe); //NOSONAR
         }
     }
 
