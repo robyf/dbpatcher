@@ -29,6 +29,8 @@ import org.apache.commons.cli.ParseException;
 import org.apache.commons.cli.PosixParser;
 
 /**
+ * Main class used for launch the dbpatcher tool from console.
+ * 
  * @since 0.9.0
  * @author Roberto Fasciolo
  */
@@ -37,7 +39,7 @@ public final class Launcher {
     private Launcher() {
     }
 
-    public static void main(final String[] args) throws DBPatcherException {
+    public static void main(final String[] args) throws DBPatcherException { //NOSONAR
         Options options = new Options();
 
         Option usernameOption = new Option("u", "username", true, "Database username");

@@ -21,12 +21,20 @@ package net.robyf.dbpatcher;
 
 
 /**
+ * A dbpatcher instance.
+ * 
  * @since 0.9.0
  * @author Roberto Fasciolo
  */
 @FunctionalInterface
 public interface DBPatcher {
     
+    /**
+     * Applies patches to a database.
+     * 
+     * @param parameters Parameters needed for running the tool
+     * @throws DBPatcherException If an error happens when patching
+     */
     void patch(Parameters parameters) throws DBPatcherException;
 
 }

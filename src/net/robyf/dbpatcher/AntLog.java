@@ -29,6 +29,11 @@ public final class AntLog implements Log {
 
     private final AntLauncher launcher;
 
+    /**
+     * Constructs an instance of this class.
+     * 
+     * @param launcher The ant launcher to be used for displaying log entries
+     */
     public AntLog(final AntLauncher launcher) {
         this.launcher = launcher;
     }

@@ -20,11 +20,19 @@
 package net.robyf.dbpatcher.parser;
 
 /**
+ * A runtime exception throw when an unexpected situation happens while parsing a SQL script.
+ * 
  * @since 0.9.0
  * @author Roberto Fasciolo
  */
 public final class ParsingException extends RuntimeException {
 
+    /**
+     * Constructs a new runtime exception with the specified detail message and cause.
+     * 
+     * @param message the detail message
+     * @param cause the cause
+     */
     public ParsingException(final String message, final Throwable cause) {
         super(message, cause);
     }

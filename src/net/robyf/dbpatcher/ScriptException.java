@@ -20,11 +20,20 @@
 package net.robyf.dbpatcher;
 
 /**
+ * An exception throw when an unexpected situation happens while patching a database to a specific
+ * version.
+ * 
  * @since 0.9.0
  * @author Roberto Fasciolo
  */
 public final class ScriptException extends DBPatcherException {
 
+    /**
+     * Constructs a new exception with the specified version and cause.
+     * 
+     * @param version the version that created the error
+     * @param cause the cause
+     */
     public ScriptException(final Long version, final Throwable cause) {
         super("An error occurred while patching to version: " + version, cause);
     }

@@ -20,11 +20,19 @@
 package net.robyf.dbpatcher;
 
 /**
+ * An exception throw when an unexpected situation happens while patching a database.
+ * 
  * @since 0.9.0
  * @author Roberto Fasciolo
  */
 public class DBPatcherException extends Exception {
 
+    /**
+     * Constructs a new exception with the specified detail message and cause.
+     * 
+     * @param message the detail message
+     * @param cause the cause
+     */
     public DBPatcherException(final String message, final Throwable cause) {
         super(message, cause);
     }

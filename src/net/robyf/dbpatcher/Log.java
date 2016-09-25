@@ -28,6 +28,11 @@ package net.robyf.dbpatcher;
 @FunctionalInterface
 public interface Log {
 
+    /**
+     * Logs a message to the user.
+     * 
+     * @param message The message to be logged
+     */
     void log(String message);
 
 }

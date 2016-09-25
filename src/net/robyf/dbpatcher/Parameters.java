@@ -76,7 +76,7 @@ public final class Parameters {
         this.targetVersion = targetVersion;
     }
 
-    public boolean rollbackIfError() {
+    public boolean rollbackIfError() { //NOSONAR
         return rollbackIfError;
     }
 

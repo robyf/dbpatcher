@@ -20,6 +20,8 @@
 package net.robyf.dbpatcher;
 
 /**
+ * Factory for DBPatcher objects.
+ * 
  * @since 0.9.0
  * @author Roberto Fasciolo
  */
@@ -30,6 +32,12 @@ public final class DBPatcherFactory {
     private DBPatcherFactory() {
     }
 
+    /**
+     * Creates a new DBPatcher instances.
+     * 
+     * @return a DBPatcher instance
+     * @throws DBPatcherException If an error happens while creating the instance
+     */
     public static DBPatcher getDBPatcher() throws DBPatcherException {
         if (patcher != null) {
             return patcher;
@@ -37,10 +45,20 @@ public final class DBPatcherFactory {
         return new DBPatcherImpl();
     }
 
+    /**
+     * Instructs this factory to use an alternate implementation of DBPatcher. For unit testing
+     * purposes only.
+     * 
+     * @param patcher The alternate DBPatcher implementation
+     */
     public static void setDBPatcher(final DBPatcher patcher) {
         DBPatcherFactory.patcher = patcher;
     }
 
+    /**
+     * Instructs this factory to revert to the default DBPatcher implementation. For unit testing
+     * purposes only.
+     */
     public static void reset() {
         DBPatcherFactory.patcher = null;
     }
