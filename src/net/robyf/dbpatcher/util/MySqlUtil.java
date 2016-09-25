@@ -20,9 +20,12 @@
 package net.robyf.dbpatcher.util;
 
 import java.io.BufferedReader;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.sql.Connection;
@@ -30,8 +33,10 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 import org.apache.commons.exec.CommandLine;
+import org.apache.commons.exec.DefaultExecuteResultHandler;
 import org.apache.commons.exec.DefaultExecutor;
 import org.apache.commons.exec.ExecuteWatchdog;
+import org.apache.commons.exec.PumpStreamHandler;
 
 import net.robyf.dbpatcher.LogFactory;
 
@@ -82,32 +87,22 @@ public final class MySqlUtil {
                               final String username,
                               final String password) {
         LogFactory.getLog().log("Backing up " + databaseName + " into " + fileName);
-        try {
-            Process process =
-                    Runtime.getRuntime().exec("mysqldump -u " + username
-                                              + " --password=" + password
-                                              + " " + databaseName);
-            BufferedReader reader =
-                    new BufferedReader(new InputStreamReader(process.getInputStream()));
-            PrintWriter writer = new PrintWriter(new File(fileName));
+
+        CommandLine command = new CommandLine("mysqldump");
+        command.addArgument("-u").addArgument(username);
+        command.addArgument("--password=" + password);
+        command.addArgument(databaseName);
+
+        try (BufferedReader reader = new BufferedReader(
+                new InputStreamReader(executeAndGetOutput(command)));
+                PrintWriter writer = new PrintWriter(new File(fileName))) {
             String line = reader.readLine();
             while (line != null) {
                 writer.println(line);
                 line = reader.readLine();
             }
-            reader.close();
-            writer.close();
-
-            process.waitFor();
-            if (process.exitValue() != 0) {
-                throw new UtilException("Error backing up database, return code from mysqldump = "
-                                        + process.exitValue());
-            }
         } catch (IOException ioe) {
             throw new UtilException("Error backing up a database", ioe);
-        } catch (InterruptedException ie) {
-            Thread.currentThread().interrupt();
-            throw new UtilException("Error backing up a database", ie);
         }
     }
 
@@ -169,4 +164,31 @@ public final class MySqlUtil {
         }
     }
 
+    private static InputStream executeAndGetOutput(final CommandLine commandLine) {
+        try {
+            ByteArrayOutputStream outStream = new ByteArrayOutputStream();
+            PumpStreamHandler handler = new PumpStreamHandler(outStream);
+            
+            DefaultExecutor executor = new DefaultExecutor();
+            executor.setWatchdog(new ExecuteWatchdog(300000L));
+            executor.setStreamHandler(handler);
+            
+            DefaultExecuteResultHandler resultHandler = new DefaultExecuteResultHandler();
+            executor.execute(commandLine, resultHandler);
+            resultHandler.waitFor();
+            
+            int returnCode = resultHandler.getExitValue();
+            if (returnCode != 0) {
+                throw new UtilException(
+                        "Error executing " + commandLine + ", return code = " + returnCode);
+            }
+            return new ByteArrayInputStream(outStream.toByteArray());
+        } catch (IOException ioe) {
+            throw new UtilException("Error executing: " + commandLine, ioe);
+        } catch (InterruptedException ie) {
+            Thread.currentThread().interrupt();
+            throw new UtilException("Interruped execution of: " + commandLine, ie);
+        }
+    }
+    
 }
