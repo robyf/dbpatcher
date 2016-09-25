@@ -8,6 +8,8 @@ In agreement with the mentioned startup the code has been forked and made open s
 
 **dbpatcher** is released under the terms of [GNU](http://www.gnu.org/) [General Public License](http://www.gnu.org/copyleft/gpl.html).
 
+Informations on the usage of the tool are available in the [user's guide](userguide.md).
+
 
 Why dbpatcher?
 ==============
