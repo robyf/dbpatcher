@@ -23,7 +23,7 @@ import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
-import java.io.FileReader;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -93,29 +93,15 @@ public final class MySqlUtil {
     public static void restore(final String databaseName, final String fileName,
             final String username, final String password) {
         LogFactory.getLog().log("Restoring from " + fileName + " into " + databaseName);
-        try {
-            Process process = Runtime.getRuntime()
-                    .exec("mysql -u " + username + " --password=" + password + " " + databaseName);
-            BufferedReader reader = new BufferedReader(new FileReader(new File(fileName)));
-            PrintWriter writer = new PrintWriter(process.getOutputStream());
-            String line = reader.readLine();
-            while (line != null) {
-                writer.println(line);
-                line = reader.readLine();
-            }
-            reader.close();
-            writer.close();
-
-            process.waitFor();
-            if (process.exitValue() != 0) {
-                throw new UtilException("Error restoring database, return code from mysql = "
-                        + process.exitValue());
-            }
+        
+        CommandLine command = new CommandLine("mysql");
+        addCredentials(command, username, password);
+        command.addArgument(databaseName);
+        
+        try (FileInputStream input = new FileInputStream(fileName)) {
+            executeWithInput(command, input);
         } catch (IOException ioe) {
             throw new UtilException("Error restoring a database", ioe);
-        } catch (InterruptedException ie) {
-            Thread.currentThread().interrupt();
-            throw new UtilException("Error restoring a database", ie);
         }
     }
 
@@ -123,9 +109,9 @@ public final class MySqlUtil {
         Statement stmt = null;
         try {
             stmt = connection.createStatement();
-            stmt.executeUpdate(
-                    "create table DATABASE_VERSION (" + "  VERSION bigint(20) not null primary key"
-                            + ") ENGINE=InnoDB DEFAULT CHARSET=latin1");
+            stmt.executeUpdate("create table DATABASE_VERSION ("
+                               + "  VERSION bigint(20) not null primary key"
+                               + ") ENGINE=InnoDB DEFAULT CHARSET=latin1");
         } catch (SQLException sqle) {
             throw new UtilException("Error creating the database version table", sqle);
         } finally {
@@ -167,6 +153,23 @@ public final class MySqlUtil {
                         "Error executing " + commandLine + ", return code = " + returnCode);
             }
             return new ByteArrayInputStream(outStream.toByteArray());
+        } catch (IOException ioe) {
+            throw new UtilException("Error executing: " + commandLine, ioe);
+        }
+    }
+
+    private static void executeWithInput(final CommandLine commandLine, final InputStream input) {
+        try {
+            PumpStreamHandler handler = new PumpStreamHandler(null, null, input);
+            
+            DefaultExecutor executor = new DefaultExecutor();
+            executor.setStreamHandler(handler);
+            executor.setWatchdog(new ExecuteWatchdog(300000L));
+            int returnCode = executor.execute(commandLine);
+            if (returnCode != 0) {
+                throw new UtilException(
+                        "Error executing " + commandLine + ", return code = " + returnCode);
+            }
         } catch (IOException ioe) {
             throw new UtilException("Error executing: " + commandLine, ioe);
         }
