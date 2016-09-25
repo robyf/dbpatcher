@@ -48,24 +48,20 @@ public final class MySqlUtil {
     private MySqlUtil() {
     }
 
-    public static void createDatabase(final String databaseName,
-                                      final String username,
-                                      final String password) {
+    public static void createDatabase(final String databaseName, final String username,
+            final String password) {
         CommandLine command = new CommandLine("mysqladmin");
-        command.addArgument("-u").addArgument(username);
-        command.addArgument("--password=" + password);
+        addCredentials(command, username, password);
         command.addArgument("create");
         command.addArgument(databaseName);
 
         execute(command);
     }
 
-    public static void dropDatabase(final String databaseName,
-                                    final String username,
-                                    final String password) {
+    public static void dropDatabase(final String databaseName, final String username,
+            final String password) {
         CommandLine command = new CommandLine("mysqladmin");
-        command.addArgument("-u").addArgument(username);
-        command.addArgument("--password=" + password);
+        addCredentials(command, username, password);
         command.addArgument("drop");
         command.addArgument("-f");
         command.addArgument(databaseName);
@@ -73,15 +69,12 @@ public final class MySqlUtil {
         execute(command);
     }
 
-    public static void backup(final String databaseName,
-                              final String fileName,
-                              final String username,
-                              final String password) {
+    public static void backup(final String databaseName, final String fileName,
+            final String username, final String password) {
         LogFactory.getLog().log("Backing up " + databaseName + " into " + fileName);
 
         CommandLine command = new CommandLine("mysqldump");
-        command.addArgument("-u").addArgument(username);
-        command.addArgument("--password=" + password);
+        addCredentials(command, username, password);
         command.addArgument(databaseName);
 
         try (BufferedReader reader = new BufferedReader(
@@ -97,18 +90,13 @@ public final class MySqlUtil {
         }
     }
 
-    public static void restore(final String databaseName,
-                               final String fileName,
-                               final String username,
-                               final String password) {
+    public static void restore(final String databaseName, final String fileName,
+            final String username, final String password) {
         LogFactory.getLog().log("Restoring from " + fileName + " into " + databaseName);
         try {
-            Process process =
-                    Runtime.getRuntime().exec("mysql -u " + username
-                                              + " --password=" + password
-                                              + " " + databaseName);
-            BufferedReader reader =
-                    new BufferedReader(new FileReader(new File(fileName)));
+            Process process = Runtime.getRuntime()
+                    .exec("mysql -u " + username + " --password=" + password + " " + databaseName);
+            BufferedReader reader = new BufferedReader(new FileReader(new File(fileName)));
             PrintWriter writer = new PrintWriter(process.getOutputStream());
             String line = reader.readLine();
             while (line != null) {
@@ -117,11 +105,11 @@ public final class MySqlUtil {
             }
             reader.close();
             writer.close();
-            
+
             process.waitFor();
             if (process.exitValue() != 0) {
                 throw new UtilException("Error restoring database, return code from mysql = "
-                                        + process.exitValue());
+                        + process.exitValue());
             }
         } catch (IOException ioe) {
             throw new UtilException("Error restoring a database", ioe);
@@ -135,14 +123,20 @@ public final class MySqlUtil {
         Statement stmt = null;
         try {
             stmt = connection.createStatement();
-            stmt.executeUpdate("create table DATABASE_VERSION ("
-                               + "  VERSION bigint(20) not null primary key"
-                               + ") ENGINE=InnoDB DEFAULT CHARSET=latin1");
+            stmt.executeUpdate(
+                    "create table DATABASE_VERSION (" + "  VERSION bigint(20) not null primary key"
+                            + ") ENGINE=InnoDB DEFAULT CHARSET=latin1");
         } catch (SQLException sqle) {
             throw new UtilException("Error creating the database version table", sqle);
         } finally {
             DBUtil.closeStatement(stmt);
         }
+    }
+
+    private static void addCredentials(final CommandLine commandLine, final String username,
+            final String password) {
+        commandLine.addArgument("-u").addArgument(username);
+        commandLine.addArgument("--password=" + password);
     }
 
     private static void execute(final CommandLine commandLine) {
@@ -163,7 +157,7 @@ public final class MySqlUtil {
         try {
             ByteArrayOutputStream outStream = new ByteArrayOutputStream();
             PumpStreamHandler handler = new PumpStreamHandler(outStream);
-            
+
             DefaultExecutor executor = new DefaultExecutor();
             executor.setWatchdog(new ExecuteWatchdog(300000L));
             executor.setStreamHandler(handler);
@@ -177,5 +171,5 @@ public final class MySqlUtil {
             throw new UtilException("Error executing: " + commandLine, ioe);
         }
     }
-    
+
 }
