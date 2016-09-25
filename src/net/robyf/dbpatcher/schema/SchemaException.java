@@ -20,11 +20,18 @@
 package net.robyf.dbpatcher.schema;
 
 /**
+ * A runtime exception throw when an unexpected situation happens while parsing a schema definition.
+ * 
  * @since 0.9.0
  * @author Roberto Fasciolo
  */
 public final class SchemaException extends RuntimeException {
 
+    /**
+     * Constructs a new runtime exception with the specified detail message.
+     * 
+     * @param message the detail message
+     */
     public SchemaException(final String message) {
         super(message);
     }

@@ -33,6 +33,8 @@ import net.robyf.dbpatcher.parser.ScriptParser;
 import net.robyf.dbpatcher.util.DirUtil;
 
 /**
+ * A schema definition.
+ * 
  * @since 0.9.0
  * @author Roberto Fasciolo
  */
@@ -42,6 +44,15 @@ public final class Schema {
     private final Map<Long, VersionDir> availableVersions;
     private final Charset charset;
     
+    /**
+     * Constructs an instance of this class.
+     * 
+     * @param schemaRoorDirectory Root directory for the schema definition in the file system
+     * @param availableVersions Available versions
+     * @param cleanupOnShutdown True if the schema definition must be removed from the file system
+     *                          after executing this tool
+     * @param charset Character set used by this schema definition
+     */
     public Schema(final File schemaRoorDirectory,
                   final Set<VersionDir> availableVersions,
                   final boolean cleanupOnShutdown,
@@ -61,6 +72,12 @@ public final class Schema {
         return Collections.unmodifiableSet(this.availableVersions.keySet());
     }
     
+    /**
+     * Returns the list of statements belonging to a schema version
+     * 
+     * @param version The given version
+     * @return The list of statements
+     */
     public List<String> getStatementsForVersion(final Long version) {
         VersionDir versionDir = this.availableVersions.get(version);
 
@@ -80,6 +97,13 @@ public final class Schema {
         return statements;
     }
 
+    /**
+     * Returns the list of steps to be applied for going from one version to another.
+     * 
+     * @param initialVersion The current version
+     * @param requiredVersion The required version
+     * @return List of steps
+     */
     public List<Long> getSteps(final Long initialVersion, final Long requiredVersion) {
         List<Long> steps = new LinkedList<>();
         
@@ -93,6 +117,12 @@ public final class Schema {
         return steps;
     }
     
+    /**
+     * Returns the list of steps to be applied for going from one version to the latest available.
+     * 
+     * @param initialVersion The current version
+     * @return List of steps
+     */
     public List<Long> getStepsToLatest(final Long initialVersion) {
         return this.getSteps(initialVersion, this.getLatestAvailableVersion());
     }

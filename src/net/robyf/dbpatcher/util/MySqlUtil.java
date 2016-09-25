@@ -135,6 +135,11 @@ public final class MySqlUtil {
         }
     }
 
+    /**
+     * Creates the table tracking the current version in a database.
+     * 
+     * @param connection Connection to the database
+     */
     public static void createDatabaseVersionTable(final Connection connection) {
         Statement stmt = null;
         try {

@@ -37,6 +37,13 @@ public final class SchemaReader {
     private Set<VersionDir> versions = new TreeSet<>();
     private boolean foundVersionDirectory = false;
     
+    /**
+     * Reads a schema definition from a directory or from a zip file.
+     * 
+     * @param schemaRoot The schema source (a directory or a zip file)
+     * @param charset Character set used in the schema definition
+     * @return The schema definition
+     */
     public Schema read(final File schemaRoot, final Charset charset) {
         if (!schemaRoot.exists()) {
             throw new SchemaException("Unexistant schema directory: " + schemaRoot.getName());
