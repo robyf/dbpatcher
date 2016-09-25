@@ -131,7 +131,7 @@ public final class MySqlUtil {
             executor.setWatchdog(new ExecuteWatchdog(300000L));
             int returnCode = executor.execute(commandLine);
             if (returnCode != 0) {
-                throw new UtilException("Error executing: " + commandLine
+                throw new UtilException("Error executing: " + commandLine // NOSONAR
                                         + ", return code = " + returnCode); //NOSONAR
             }
         } catch (IOException ioe) {
@@ -149,7 +149,7 @@ public final class MySqlUtil {
             executor.setStreamHandler(handler);
             int returnCode = executor.execute(commandLine);
             if (returnCode != 0) {
-                throw new UtilException("Error executing: " + commandLine
+                throw new UtilException("Error executing: " + commandLine //NOSONAR
                                         + ", return code = " + returnCode); //NOSONAR
             }
             return new ByteArrayInputStream(outStream.toByteArray());
@@ -167,7 +167,7 @@ public final class MySqlUtil {
             executor.setWatchdog(new ExecuteWatchdog(300000L));
             int returnCode = executor.execute(commandLine);
             if (returnCode != 0) {
-                throw new UtilException("Error executing: " + commandLine
+                throw new UtilException("Error executing: " + commandLine //NOSONAR
                                         + ", return code = " + returnCode); //NOSONAR
             }
         } catch (IOException ioe) {
