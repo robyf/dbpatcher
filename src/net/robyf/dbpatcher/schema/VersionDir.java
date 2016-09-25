@@ -51,7 +51,7 @@ final class VersionDir implements Comparable<VersionDir> {
     }
 
     @Override
-    public int hashCode() {
+    public int hashCode() { //NOSONAR
         final int prime = 31;
         int result = 1;
         result = prime * result + ((directory == null) ? 0 : directory.hashCode());
@@ -60,7 +60,7 @@ final class VersionDir implements Comparable<VersionDir> {
     }
 
     @Override
-    public boolean equals(final Object obj) {
+    public boolean equals(final Object obj) { //NOSONAR
         if (this == obj) {
             return true;
         }
