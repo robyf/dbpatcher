@@ -33,7 +33,6 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 import org.apache.commons.exec.CommandLine;
-import org.apache.commons.exec.DefaultExecuteResultHandler;
 import org.apache.commons.exec.DefaultExecutor;
 import org.apache.commons.exec.ExecuteWatchdog;
 import org.apache.commons.exec.PumpStreamHandler;
@@ -172,12 +171,7 @@ public final class MySqlUtil {
             DefaultExecutor executor = new DefaultExecutor();
             executor.setWatchdog(new ExecuteWatchdog(300000L));
             executor.setStreamHandler(handler);
-            
-            DefaultExecuteResultHandler resultHandler = new DefaultExecuteResultHandler();
-            executor.execute(commandLine, resultHandler);
-            resultHandler.waitFor();
-            
-            int returnCode = resultHandler.getExitValue();
+            int returnCode = executor.execute(commandLine);
             if (returnCode != 0) {
                 throw new UtilException(
                         "Error executing " + commandLine + ", return code = " + returnCode);
@@ -185,9 +179,6 @@ public final class MySqlUtil {
             return new ByteArrayInputStream(outStream.toByteArray());
         } catch (IOException ioe) {
             throw new UtilException("Error executing: " + commandLine, ioe);
-        } catch (InterruptedException ie) {
-            Thread.currentThread().interrupt();
-            throw new UtilException("Interruped execution of: " + commandLine, ie);
         }
     }
     
