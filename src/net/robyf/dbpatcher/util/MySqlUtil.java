@@ -48,6 +48,13 @@ public final class MySqlUtil {
     private MySqlUtil() {
     }
 
+    /**
+     * Creates a new MySQL database.
+     * 
+     * @param databaseName The name for the new database
+     * @param username Username of the MySQL administration user
+     * @param password Password of the MySQL administration user
+     */
     public static void createDatabase(final String databaseName, final String username,
             final String password) {
         CommandLine command = new CommandLine("mysqladmin");
@@ -58,6 +65,13 @@ public final class MySqlUtil {
         execute(command);
     }
 
+    /**
+     * Drops an existing MySQL database.
+     * 
+     * @param databaseName The name of the database to be dropped
+     * @param username Username of the MySQL administration user
+     * @param password Password of the MySQL administration user
+     */
     public static void dropDatabase(final String databaseName, final String username,
             final String password) {
         CommandLine command = new CommandLine("mysqladmin");
@@ -69,6 +83,14 @@ public final class MySqlUtil {
         execute(command);
     }
 
+    /**
+     * Backs up a MySQL database to a file.
+     * 
+     * @param databaseName The name of the database
+     * @param fileName Backup file to be created
+     * @param username Username of the database user
+     * @param password Password of the database user
+     */
     public static void backup(final String databaseName, final String fileName,
             final String username, final String password) {
         LogFactory.getLog().log("Backing up " + databaseName + " into " + fileName);
@@ -90,6 +112,14 @@ public final class MySqlUtil {
         }
     }
 
+    /**
+     * Restores a MySQL database from a file.
+     * 
+     * @param databaseName The name of the database
+     * @param fileName Backup file
+     * @param username Username of the database user
+     * @param password Password of the database user
+     */
     public static void restore(final String databaseName, final String fileName,
             final String username, final String password) {
         LogFactory.getLog().log("Restoring from " + fileName + " into " + databaseName);

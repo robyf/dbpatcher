@@ -46,6 +46,11 @@ public final class DBUtil {
     private DBUtil() {
     }
 
+    /**
+     * Closes a database connection.
+     * 
+     * @param connection The connection to be closed
+     */
     public static void closeConnection(final Connection connection) {
         if (connection == null) {
             return;
@@ -57,6 +62,11 @@ public final class DBUtil {
         }
     }
 
+    /**
+     * Closes a database statement
+     * 
+     * @param statement The statement to be closed
+     */
     public static void closeStatement(final Statement statement) {
         if (statement == null) {
             return;
@@ -68,6 +78,11 @@ public final class DBUtil {
         }
     }
 
+    /**
+     * Closes a result set.
+     * 
+     * @param resultSet The result set to be closed
+     */
     public static void closeResultSet(final ResultSet resultSet) {
         if (resultSet == null) {
             return;
@@ -79,6 +94,12 @@ public final class DBUtil {
         }
     }
 
+    /**
+     * Lists the tables present in a database.
+     * 
+     * @param connection Connection to the database
+     * @return List of table names
+     */
     public static List<String> getTables(final Connection connection) {
         Statement stmt = null;
         ResultSet resultSet = null;
@@ -100,6 +121,12 @@ public final class DBUtil {
         }
     }
 
+    /**
+     * Reads the version number from a database.
+     * 
+     * @param connection Connection to the database
+     * @return The version number, or null if the versions table is not present
+     */
     public static Long getDatabaseVersion(final Connection connection) {
         PreparedStatement stmt = null;
         ResultSet resultSet = null;
@@ -126,6 +153,12 @@ public final class DBUtil {
         }
     }
 
+    /**
+     * Updates the version number in a database.
+     * 
+     * @param version The new version number
+     * @param connection Connection to the database
+     */
     public static void updateDatabaseVersion(final Long version, final Connection connection) {
         LogFactory.getLog().log("Updating database version to: " + version);
         PreparedStatement updateStmt = null;

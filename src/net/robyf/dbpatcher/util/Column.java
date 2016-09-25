@@ -40,6 +40,14 @@ public final class Column {
         this.nullable = (metadata.isNullable(index) == 1); //NOSONAR
     }
 
+    /**
+     * Creates an instance of this class.
+     * 
+     * @param name Column name
+     * @param type SQL type of the column
+     * @param size Size of the column
+     * @param nullable True if the column is nullable
+     */
     public Column(final String name, final String type, final int size, final boolean nullable) {
         this.name = name;
         this.type = type;

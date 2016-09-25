@@ -51,6 +51,12 @@ public final class ZipUtil {
         out.close();
     }
 
+    /**
+     * Extracts the content of a zip file in a directory in the file system.
+     * 
+     * @param inputFile The zip file to be extracted
+     * @param outDir The target directory
+     */
     public static void extract(final File inputFile, final File outDir) {
         try {
             ZipFile zipFile = new ZipFile(inputFile);
