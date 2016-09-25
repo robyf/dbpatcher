@@ -57,11 +57,7 @@ public final class MySqlUtil {
         command.addArgument("create");
         command.addArgument(databaseName);
 
-        int code = execute(command);
-        if (code != 0) {
-            throw new UtilException("Error creating database, return code from mysqladmin = "
-                    + code);
-        }
+        execute(command);
     }
 
     public static void dropDatabase(final String databaseName,
@@ -74,11 +70,7 @@ public final class MySqlUtil {
         command.addArgument("-f");
         command.addArgument(databaseName);
 
-        int code = execute(command);
-        if (code != 0) {
-            throw new UtilException("Error dropping database, return code from mysqladmin = "
-                    + code);
-        }
+        execute(command);
     }
 
     public static void backup(final String databaseName,
@@ -153,11 +145,15 @@ public final class MySqlUtil {
         }
     }
 
-    private static int execute(final CommandLine commandLine) {
+    private static void execute(final CommandLine commandLine) {
         try {
             DefaultExecutor executor = new DefaultExecutor();
             executor.setWatchdog(new ExecuteWatchdog(300000L));
-            return executor.execute(commandLine);
+            int returnCode = executor.execute(commandLine);
+            if (returnCode != 0) {
+                throw new UtilException(
+                        "Error executing " + commandLine + ", return code = " + returnCode);
+            }
         } catch (IOException ioe) {
             throw new UtilException("Error executing: " + commandLine, ioe);
         }
