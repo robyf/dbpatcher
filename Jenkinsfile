@@ -15,13 +15,12 @@ node {
         stage("Upload archives") {
             sh "./gradlew --info uploadArchives"
         }
-/*        
+
         if (env.BRANCH_NAME == "master") {
-            stage("Publish plugin") {
-                sh "./gradlew --info bintrayUpload publishPlugins"
+            stage("Upload to bintray") {
+                sh "./gradlew --info bintrayUpload"
             }
         }
-*/
     } finally {
         stage("Publish reports") {
             sh "./gradlew --info sonarqube"

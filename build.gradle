@@ -252,7 +252,7 @@ bintray {
 
     pkg {
         repo = 'maven-repo'
-        name = 'gradle-jarinjar-plugin'
+        name = 'dbpatcher'
         desc = 'A tool for applying incremental updates to a MySQL or MariaDB database.'
         licenses = [ 'GPL-2.0' ]
         websiteUrl = 'https://github.com/robyf/dbpatcher'
