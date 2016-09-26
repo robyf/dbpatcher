@@ -269,6 +269,6 @@ bintray {
 
 sonarqube {
     properties {
-        property "sonar.version", ext.sonarProjectVersion
+        property "sonar.version", project.ext.sonarProjectVersion
     }
 }
