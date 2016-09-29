@@ -98,3 +98,7 @@ version | Target version number (optional, by default all the increments are app
 rollbackIfError | Rolls back the entire operation in case of errors (optional, default = false)
 simulationMode | Simulate the operation without touching the current database (optional, default = false)
 charset | Character set used for reading the scripts (optional, default = ISO-8859-1)
+
+Running from gradle
+-------------------
+**dbpatcher** can be executed as gradle task using the [gradle dbpatcher plugin](https://github.com/robyf/gradle-dbpatcher-plugin).
