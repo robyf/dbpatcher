@@ -58,9 +58,7 @@ public final class ZipUtil {
      * @param outDir The target directory
      */
     public static void extract(final File inputFile, final File outDir) {
-        try {
-            ZipFile zipFile = new ZipFile(inputFile);
-
+        try (ZipFile zipFile = new ZipFile(inputFile)) {
             Enumeration<? extends ZipEntry> entries = zipFile.entries();
 
             while (entries.hasMoreElements()) {
@@ -77,8 +75,6 @@ public final class ZipUtil {
                                                             new File(outDir, entry.getName()))));
                 }
             }
-
-            zipFile.close();
         } catch (IOException ioe) {
             throw new UtilException("Error extracting a zip file", ioe);
         }

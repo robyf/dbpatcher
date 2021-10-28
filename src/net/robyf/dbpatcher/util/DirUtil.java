@@ -60,9 +60,11 @@ public final class DirUtil {
                 DirUtil.delete(file);
             }
         }
-        
-        if (!entry.delete()) {
-            throw new UtilException("Error deleting: " + entry.getAbsolutePath());
+
+        try {
+            Files.delete(entry.toPath());
+        } catch (IOException ioe) {
+            throw new UtilException("Error deleting: " + entry.getAbsolutePath(), ioe);
         }
     }
 
