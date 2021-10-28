@@ -5,7 +5,6 @@ plugins {
 
 apply plugin: 'java'
 apply plugin: 'checkstyle'
-apply plugin: 'jdepend'
 apply plugin: 'jacoco'
 apply plugin: 'org.sonarqube'
 apply plugin: 'maven'
@@ -148,14 +147,6 @@ task cpdHtml {
 }
 
 cpdCheck.finalizedBy(project.tasks.cpdHtml)
-
-task jdependHtml {
-    doLast {
-        ant.xslt(in: "build/reports/jdepend/main.xml", style: "config/jdepend.xsl", out: "build/reports/jdepend/jdepend.html")
-    }
-}
-
-jdependMain.finalizedBy(project.tasks.jdependHtml)
 
 task sourceJar(type: Jar) {
     description = "An archive of the source code for Maven Central"
