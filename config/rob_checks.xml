@@ -11,7 +11,7 @@
 <module name="Checker">
   <property name="severity" value="warning"/>
   <module name="TreeWalker">
-    <module name="FileContentsHolder"/>
+    <!-- module name="FileContentsHolder"/ -->
     <module name="ConstantName"/>
     <module name="LocalFinalVariableName"/>
     <module name="LocalVariableName"/>
@@ -98,5 +98,5 @@
   <module name="FileTabCharacter"/>
   <module name="NewlineAtEndOfFile"/>
   <module name="Translation"/>
-  <module name="SuppressionCommentFilter"/>
+  <!-- module name="SuppressionCommentFilter"/ -->
 </module>

@@ -1,6 +1,6 @@
 plugins {
-    id 'de.aaschmid.cpd' version '1.0'
-    id "org.sonarqube" version "2.1"
+    id 'de.aaschmid.cpd' version '3.0'
+    id "org.sonarqube" version "3.3"
 }
 
 apply plugin: 'java'
@@ -47,7 +47,7 @@ if ( isSnapshot ) {
 }
 
 wrapper {
-    gradleVersion = '3.1'
+    gradleVersion = '5.6.4'
 }
 
 repositories {
@@ -141,14 +141,18 @@ cpdCheck {
     ignoreFailures = true
 }
 
-task cpdHtml << {
-    ant.xslt(in: "build/reports/cpd/cpdCheck.xml", style: "config/cpdhtml.xslt", out: "build/reports/cpd/cpd.html")
+task cpdHtml {
+    doLast {
+        ant.xslt(in: "build/reports/cpd/cpdCheck.xml", style: "config/cpdhtml.xslt", out: "build/reports/cpd/cpd.html")
+    }
 }
 
 cpdCheck.finalizedBy(project.tasks.cpdHtml)
 
-task jdependHtml << {
-    ant.xslt(in: "build/reports/jdepend/main.xml", style: "config/jdepend.xsl", out: "build/reports/jdepend/jdepend.html")
+task jdependHtml {
+    doLast {
+        ant.xslt(in: "build/reports/jdepend/main.xml", style: "config/jdepend.xsl", out: "build/reports/jdepend/jdepend.html")
+    }
 }
 
 jdependMain.finalizedBy(project.tasks.jdependHtml)
@@ -248,3 +252,4 @@ sonarqube {
         property "sonar.projectVersion", project.ext.sonarProjectVersion
     }
 }
+
