@@ -129,7 +129,7 @@ public final class DBUtil {
             // Check if the table exists in order to avoid SQLException
             List<String> tables = DBUtil.getTables(connection);
             if (tables.contains("DATABASE_VERSION")) {
-                stmt = connection.prepareStatement("select * from DATABASE_VERSION");
+                stmt = connection.prepareStatement("select * from DATABASE_VERSION"); // NOSONAR
                 resultSet = stmt.executeQuery();
 
                 if (resultSet.next()) {
