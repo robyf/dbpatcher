@@ -54,6 +54,7 @@ usage: java -jar dbpatcher.jar -u username -p password -d database_name
 Available options:
  -c,--character-set <arg>   Character set (default value: ISO-8859-1)
  -d,--databaseName <arg>    Database name
+ -i,--insecure              Do not take backups when applying steps
  -p,--password <arg>        Database password
  -r,--rollback-if-error     Rolls back the entire operation in case of
                             errors
@@ -67,6 +68,11 @@ The database must be residing on localhost (network is not supported) and the us
 The process' exit code indicates if the operation was successful or not (0 indicates success, every other value failure).
 
 Note that the tool tracks what increments have been applied in a database table, called `DATABASE_VERSION`. **dbpatcher** itself creates it and it must not be altered manually in any way.
+
+### Insecure mode
+To speed up things during development it's possible to use insecure mode. Normally (when rollback-if-error is not specified) before applying every version a backup of the database is taken.
+This allows to fully rollback a version in case of errors but takes time. When run in insecure mode dbpatcher skips this backup step (so in case of error the database is left in an inconsistent
+state).
 
 ### Simulation mode
 In order to be sure, for example in an automated deployment to production procedure, that the SQL scripts work properly and don't break the database `simulation mode` has been introduced. When **dbpatcher** is run in this mode it first takes a backup of the target database, restore it into a newly created temporary one, tries to apply the increments and then drop the newly create temporary db. By doing this the procedure can be rehearsed without risking to leave the database in an unusable state.
@@ -96,6 +102,7 @@ database | Database name
 schemaRoot | Path to a database definition. It can be either a directory or a zip file
 version | Target version number (optional, by default all the increments are applied)
 rollbackIfError | Rolls back the entire operation in case of errors (optional, default = false)
+insecureMode | Do not take backups when applying steps (optional, default = false)
 simulationMode | Simulate the operation without touching the current database (optional, default = false)
 charset | Character set used for reading the scripts (optional, default = ISO-8859-1)
 
