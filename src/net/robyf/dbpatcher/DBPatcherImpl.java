@@ -113,7 +113,7 @@ final class DBPatcherImpl implements DBPatcher {
                     this.schema.getSteps(DBUtil.getDatabaseVersion(this.connection),
                                          this.parameters.getTargetVersion());
         }
-        LogFactory.getLog().log("Steps to be applied: " + steps.toString());
+        LogFactory.getLog().log("Steps to be applied: " + steps);
         return steps;
     }
 
@@ -137,7 +137,7 @@ final class DBPatcherImpl implements DBPatcher {
         File backupFile = null;
         LogFactory.getLog().log("Applying step: " + step);
         try {
-            if (!this.parameters.rollbackIfError()) {
+            if (!this.parameters.rollbackIfError() && !this.parameters.isInsecureMode()) {
                 backupFile = this.backup();
             }
 
@@ -151,7 +151,7 @@ final class DBPatcherImpl implements DBPatcher {
             }
             DBUtil.updateDatabaseVersion(step, this.connection);
         } catch (SQLException sqle) {
-            if (!this.parameters.rollbackIfError()) {
+            if (!this.parameters.rollbackIfError() && !this.parameters.isInsecureMode()) {
                 this.dropAndRestore(backupFile);
             }
             throw new ScriptException(step, sqle);

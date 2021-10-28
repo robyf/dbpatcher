@@ -34,6 +34,7 @@ public final class Parameters {
     private Long targetVersion;
     private boolean rollbackIfError = false;
     private boolean simulationMode = false;
+    private boolean insecureMode = false;
     private Charset charset = Charset.forName("ISO-8859-1");
 
     public String getDatabaseName() {
@@ -90,6 +91,14 @@ public final class Parameters {
 
     public void setSimulationMode(final boolean simulationMode) {
         this.simulationMode = simulationMode;
+    }
+
+    public boolean isInsecureMode() {
+        return insecureMode;
+    }
+
+    public void setInsecureMode(final boolean insecureMode) {
+        this.insecureMode = insecureMode;
     }
 
     public Charset getCharset() {
