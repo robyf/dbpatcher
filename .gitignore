@@ -6,3 +6,5 @@
 /.project
 /.checkstyle
 /gradle.properties
+
+/.idea/
