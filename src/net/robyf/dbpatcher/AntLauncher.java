@@ -38,6 +38,7 @@ public final class AntLauncher extends Task {
     private Long version = null;
     private boolean rollbackIfError = false;
     private boolean simulationMode = false;
+    private boolean insecureMode = false;
     private Charset charset = Charset.forName("ISO-8859-1");
 
     public void setUsername(final String username) {
@@ -68,6 +69,10 @@ public final class AntLauncher extends Task {
         this.simulationMode = simulationMode;
     }
 
+    public void setInsecureMode(final boolean insecureMode) {
+        this.insecureMode = insecureMode;
+    }
+
     public void setCharset(final String charset) {
         this.charset = Charset.forName(charset);
     }
@@ -87,6 +92,7 @@ public final class AntLauncher extends Task {
         parameters.setTargetVersion(this.version);
         parameters.setRollbackIfError(this.rollbackIfError);
         parameters.setSimulationMode(this.simulationMode);
+        parameters.setInsecureMode(this.insecureMode);
         parameters.setCharset(this.charset);
 
         LogFactory.setLog(new AntLog(this));

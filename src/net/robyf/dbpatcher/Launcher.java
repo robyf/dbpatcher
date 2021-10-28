@@ -63,6 +63,10 @@ public final class Launcher {
                           "simulation",
                           false,
                           "Simulate the operation without touching the current database");
+        options.addOption("i",
+                          "insecure",
+                          false,
+                          "Do not take backups when applying steps");
         options.addOption("c",
                           "character-set",
                           true,
@@ -79,6 +83,7 @@ public final class Launcher {
 
             parameters.setRollbackIfError(commandLine.hasOption("r"));
             parameters.setSimulationMode(commandLine.hasOption("s"));
+            parameters.setInsecureMode(commandLine.hasOption("i"));
             if (commandLine.hasOption("v")) {
                 parameters.setTargetVersion(new Long(commandLine.getOptionValue("v")));
             }

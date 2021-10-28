@@ -140,6 +140,7 @@ public final class AntLauncherTest {
         assertNull(parms.getTargetVersion());
         assertFalse(parms.rollbackIfError());
         assertFalse(parms.isSimulationMode());
+        assertFalse(parms.isInsecureMode());
         assertEquals(Charset.forName("ISO-8859-1"), parms.getCharset());
     }
 
@@ -163,6 +164,30 @@ public final class AntLauncherTest {
         assertNull(parms.getTargetVersion());
         assertTrue(parms.rollbackIfError());
         assertFalse(parms.isSimulationMode());
+        assertFalse(parms.isInsecureMode());
+    }
+
+    @Test
+    public void testLauncher_with_insecure_mode() throws Exception {
+        FakePatcher fake = new FakePatcher();
+        DBPatcherFactory.setDBPatcher(fake);
+
+        this.launcher.setUsername("username");
+        this.launcher.setPassword("password");
+        this.launcher.setDatabase("database");
+        this.launcher.setSchemaRoot(new File("/schema"));
+        this.launcher.setInsecureMode(true);
+        this.launcher.execute();
+
+        Parameters parms = fake.getParameters();
+        assertEquals("username", parms.getUsername());
+        assertEquals("password", parms.getPassword());
+        assertEquals("database", parms.getDatabaseName());
+        assertEquals("/schema", parms.getSchemaPath());
+        assertNull(parms.getTargetVersion());
+        assertFalse(parms.rollbackIfError());
+        assertFalse(parms.isSimulationMode());
+        assertTrue(parms.isInsecureMode());
     }
 
     @Test
@@ -185,6 +210,7 @@ public final class AntLauncherTest {
         assertEquals(new Long(15), parms.getTargetVersion());
         assertFalse(parms.rollbackIfError());
         assertFalse(parms.isSimulationMode());
+        assertFalse(parms.isInsecureMode());
     }
 
     @Test
@@ -207,6 +233,7 @@ public final class AntLauncherTest {
         assertNull(parms.getTargetVersion());
         assertFalse(parms.rollbackIfError());
         assertTrue(parms.isSimulationMode());
+        assertFalse(parms.isInsecureMode());
     }
 
     @Test
@@ -230,6 +257,7 @@ public final class AntLauncherTest {
         assertFalse(parms.rollbackIfError());
         assertFalse(parms.isSimulationMode());
         assertEquals(Charset.forName("UTF-8"), parms.getCharset());
+        assertFalse(parms.isInsecureMode());
     }
 
     private final class FakePatcher implements DBPatcher {
