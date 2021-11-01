@@ -37,7 +37,7 @@ public final class DBUtil {
 
     static {
         try {
-            Class.forName("com.mysql.jdbc.Driver");
+            Class.forName("com.mysql.cj.jdbc.Driver");
         } catch (ClassNotFoundException cnfe) {
             throw new UtilException("Error loading JDBC driver", cnfe);
         }
