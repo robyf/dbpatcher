@@ -156,7 +156,7 @@ public final class MySqlUtilTest {
             Column column = columns.get(0);
             assertEquals("VERSION", column.getName());
             assertEquals("BIGINT", column.getType());
-            assertEquals(20, column.getSize());
+            assertEquals(19, column.getSize());
             assertFalse(column.isNullable());
         } finally {
             DBUtil.closeConnection(connection);

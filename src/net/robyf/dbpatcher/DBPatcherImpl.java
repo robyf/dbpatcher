@@ -45,7 +45,7 @@ final class DBPatcherImpl implements DBPatcher {
 
     DBPatcherImpl() throws DBPatcherException {
         try {
-            Class.forName("com.mysql.jdbc.Driver");
+            Class.forName("com.mysql.cj.jdbc.Driver");
         } catch (ClassNotFoundException cnfe) {
             throw new DBPatcherException("Error loading JDBC driver", cnfe);
         }

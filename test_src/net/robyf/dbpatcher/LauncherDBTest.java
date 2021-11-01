@@ -46,7 +46,7 @@ public final class LauncherDBTest {
             assertEquals(new Long(1), DBUtil.getDatabaseVersion(connection));
 
             List<Column> expected = new LinkedList<Column>();
-            expected.add(new Column("ID", "BIGINT", 20, false));
+            expected.add(new Column("ID", "BIGINT", 19, false));
             expected.add(new Column("NAME", "VARCHAR", 10, false));
             assertEquals(expected, DBTestUtil.getColumnsFor("MYTABLE", connection));
         } finally {

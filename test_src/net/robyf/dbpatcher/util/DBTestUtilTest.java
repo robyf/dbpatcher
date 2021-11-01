@@ -61,7 +61,7 @@ public final class DBTestUtilTest {
             DBUtil.closeStatement(stmt);
 
             List<Column> expected = new LinkedList<Column>();
-            expected.add(new Column("ID", "BIGINT", 20, false));
+            expected.add(new Column("ID", "BIGINT", 19, false));
             expected.add(new Column("NAME", "VARCHAR", 10, false));
             expected.add(new Column("COMMENT", "VARCHAR", 255, true));
             

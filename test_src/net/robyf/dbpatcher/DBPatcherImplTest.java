@@ -59,7 +59,7 @@ public final class DBPatcherImplTest {
             assertEquals(new Long(1), DBUtil.getDatabaseVersion(connection));
 
             List<Column> expected = new LinkedList<Column>();
-            expected.add(new Column("ID", "BIGINT", 20, false));
+            expected.add(new Column("ID", "BIGINT", 19, false));
             expected.add(new Column("NAME", "VARCHAR", 10, false));
             assertEquals(expected, DBTestUtil.getColumnsFor("MYTABLE", connection));
         } finally {
@@ -89,12 +89,12 @@ public final class DBPatcherImplTest {
             assertEquals(new Long(2), DBUtil.getDatabaseVersion(connection));
 
             List<Column> expected = new LinkedList<Column>();
-            expected.add(new Column("ID", "BIGINT", 20, false));
+            expected.add(new Column("ID", "BIGINT", 19, false));
             expected.add(new Column("NAME", "VARCHAR", 10, false));
             assertEquals(expected, DBTestUtil.getColumnsFor("MYTABLE", connection));
 
             expected = new LinkedList<Column>();
-            expected.add(new Column("ARTIST_ID", "BIGINT", 20, false));
+            expected.add(new Column("ARTIST_ID", "BIGINT", 19, false));
             expected.add(new Column("NAME", "VARCHAR", 256, false));
             assertEquals(expected, DBTestUtil.getColumnsFor("ARTISTS", connection));
         } finally {
@@ -128,12 +128,12 @@ public final class DBPatcherImplTest {
             assertEquals(new Long(2), DBUtil.getDatabaseVersion(connection));
 
             List<Column> expected = new LinkedList<Column>();
-            expected.add(new Column("ID", "BIGINT", 20, false));
+            expected.add(new Column("ID", "BIGINT", 19, false));
             expected.add(new Column("NAME", "VARCHAR", 10, false));
             assertEquals(expected, DBTestUtil.getColumnsFor("MYTABLE", connection));
 
             expected = new LinkedList<Column>();
-            expected.add(new Column("ARTIST_ID", "BIGINT", 20, false));
+            expected.add(new Column("ARTIST_ID", "BIGINT", 19, false));
             expected.add(new Column("NAME", "VARCHAR", 256, false));
             assertEquals(expected, DBTestUtil.getColumnsFor("ARTISTS", connection));
         } finally {
@@ -163,7 +163,7 @@ public final class DBPatcherImplTest {
             assertEquals(new Long(1), DBUtil.getDatabaseVersion(connection));
 
             List<Column> expected = new LinkedList<Column>();
-            expected.add(new Column("ID", "BIGINT", 20, false));
+            expected.add(new Column("ID", "BIGINT", 19, false));
             expected.add(new Column("NAME", "VARCHAR", 10, false));
             assertEquals(expected, DBTestUtil.getColumnsFor("MYTABLE", connection));
         } finally {
@@ -248,12 +248,12 @@ public final class DBPatcherImplTest {
             assertEquals(new Long(2), DBUtil.getDatabaseVersion(connection));
 
             List<Column> expected = new LinkedList<Column>();
-            expected.add(new Column("ID", "BIGINT", 20, false));
+            expected.add(new Column("ID", "BIGINT", 19, false));
             expected.add(new Column("NAME", "VARCHAR", 10, false));
             assertEquals(expected, DBTestUtil.getColumnsFor("MYTABLE", connection));
 
             expected = new LinkedList<Column>();
-            expected.add(new Column("ARTIST_ID", "BIGINT", 20, false));
+            expected.add(new Column("ARTIST_ID", "BIGINT", 19, false));
             expected.add(new Column("NAME", "VARCHAR", 256, false));
             assertEquals(expected, DBTestUtil.getColumnsFor("ARTISTS", connection));
         } finally {
@@ -303,7 +303,7 @@ public final class DBPatcherImplTest {
             assertEquals(new Long(1), DBUtil.getDatabaseVersion(connection));
 
             List<Column> expected = new LinkedList<Column>();
-            expected.add(new Column("ID", "BIGINT", 20, false));
+            expected.add(new Column("ID", "BIGINT", 19, false));
             expected.add(new Column("NAME", "VARCHAR", 10, false));
             assertEquals(expected, DBTestUtil.getColumnsFor("MYTABLE", connection));
         } finally {
@@ -333,7 +333,7 @@ public final class DBPatcherImplTest {
             assertEquals(new Long(1), DBUtil.getDatabaseVersion(connection));
 
             List<Column> expected = new LinkedList<Column>();
-            expected.add(new Column("ID", "BIGINT", 20, false));
+            expected.add(new Column("ID", "BIGINT", 19, false));
             expected.add(new Column("NAME", "VARCHAR", 10, false));
             assertEquals(expected, DBTestUtil.getColumnsFor("MYTABLE", connection));
         } finally {
